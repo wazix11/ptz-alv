@@ -64,19 +64,6 @@ body {
     margin-top: 20px;
 }
 
-
-
-.heading-container::before {
-    content: "";
-    position: absolute;
-    bottom: -10px; /* Adjust as needed */
-    left: 0;
-    width: 100%;
-    height: 10px; /* Adjust as needed */
-    background: linear-gradient(to top right, transparent, rgba(0, 0, 0, 0.3)); /* Add gradient for shadow effect */
-}
-
-
 .box-background {
     position: absolute;
     margin-top: -20px;
@@ -299,8 +286,48 @@ body {
     font-weight: lighter; /* Set font weight to normal */
 }
 
+.zoomr-heading {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #b2b2b2;
+    font-size: 15px; /* Adjust font size */
+    margin-left: 20px; /* Adjust spacing between label and camera-pad */
+    margin-bottom: -5px; /* Reduce the gap between the label and the camera-pad */
+    font-weight: lighter; /* Set font weight to normal */
+}
+
+.zoom-heading {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #b2b2b2;
+    font-size: 15px; /* Adjust font size */
+    margin-left: 25px; /* Adjust spacing between label and camera-pad */
+    margin-bottom: -5px; /* Reduce the gap between the label and the camera-pad */
+    font-weight: lighter; /* Set font weight to normal */
+}
+
 .toggle-button {
     float: right;
+}
+
+.zoomr-menu.collapsed {
+    display: none;
+}
+
+.zoom-menu.collapsed {
+    display: none;
+}
+
+.zoom-menu-inner.collapsed {
+    display: none;
+}
+
+.zoom-menu-outer.collapsed {
+    display: none;
+}
+
+.zoom-dropdown.collapsed {
+    display: none;
 }
 
 .direction-pad.collapsed {
@@ -957,6 +984,29 @@ body {
     flex-direction: column;
 }
 
+.zoomr-menu {
+    display: grid;
+    grid-template-columns: repeat(2, 50px);
+    grid-gap: 10px;
+    width: 200px;
+    margin-left: 20px;
+    margin-top: 7px;
+}
+
+.zoom-menu {
+    display: grid;
+    grid-template-columns: repeat(2, 50px);
+    grid-gap: 10px;
+    width: 200px;
+    margin-left: 20px;
+    margin-top: 7px;
+}
+
+.zoom-menu-inner {
+    margin-left: 20px;
+    margin-right: -20px;
+}
+
 .direction-pad {
     display: grid;
     grid-template-columns: repeat(3, 50px);
@@ -1037,12 +1087,9 @@ body {
     margin-top: 7px;
     margin-left: 19px;
 }
-.zoom-container {
-    display: flex;
-    flex-direction: column; /* Arrange elements in a column */
-    align-items: flex-start; /* Align items to the start */
-    margin-top: 7px;
-    margin-left: 19px;
+
+.zoom-menu-outer.collapsed {
+    display: none;
 }
 
 .ptz-input {
@@ -1089,8 +1136,44 @@ body {
     background-color: #1e88e5; /* Highlight color on hover */
 }
 
+.send-button-zoom {
+    width: 172px;
+    height: 30px;
+    margin-top: 40px; /* Add space between input boxes and send button */
+    margin-left: -80px;
+    padding: 6px 18px; /* Adjust padding */
+    border: none;
+    border-radius: 5px;
+    background-color: #1565c0;
+    color: #ffffff;
+    cursor: pointer;
+    font-size: 16px;
+    box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+}
+
+.send-button-zoom:hover {
+    background-color: #1e88e5; /* Highlight color on hover */
+}
+
 .dropdown {
     margin-bottom: 10px; /* Adjust margin as needed */
+}
+
+.zoom-dropdown select {
+    width: 100px; /* Adjust width as needed */
+    padding: 5px;
+    color: white;
+    font-size: 14px;
+    border: none;
+    border-radius: 5px; 
+    background-color: #3C3C3C;
+    cursor: pointer;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    margin-top: 5px;
+    margin-left: 25px;
+    letter-spacing: 0.5px;
+    padding-left: 10px;
 }
 
 .swap-dropdown1 select {
@@ -1107,7 +1190,6 @@ body {
     margin-top: 10px;
     letter-spacing: 0.5px;
     padding-left: 10px;
-
 }
 
 .swap-dropdown2 select {
@@ -1469,6 +1551,12 @@ body {
     text-decoration-thickness: 2px; /* Adjust the thickness as needed */
 }
 
+.zoom-heading-container {
+    display: flex;
+    margin-left: 15px; /* Adjust margin as needed */
+    margin-right: -15px; /* Set to opposite of left margin to prevent menu from expanding */
+}
+
 .volume-control-dialog {
     position: fixed;
     top: 50%;
@@ -1616,7 +1704,13 @@ body {
 }
 .zoom-slider-wrapper {
     display: flex;
-    margin-left: -25px;
+    margin-left: -45px;
+    margin-bottom: 5px;
+}
+
+.zoom-dropdown-wrapper {
+    display: flex;
+    margin-left: -45px;
     margin-bottom: 5px;
 }
 

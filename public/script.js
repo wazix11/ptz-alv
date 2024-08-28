@@ -182,6 +182,17 @@ function togglePad(selector) {
     });
 }
 
+function toggleZoomMenu(selector) {
+    const zoomMenus = document.querySelectorAll('.zoomr-menu, .zoom-menu');
+    zoomMenus.forEach(menu => {
+        if (menu.classList.contains(selector.replace('.', ''))) {
+            menu.classList.remove('hidden'); // Show the menu
+        } else {
+            menu.classList.add('hidden'); // Hide the menu
+        }
+    });
+}
+
 // Function to toggle the visibility of the direction container
 function toggleDirectionContainer(isVisible) {
 
@@ -2317,13 +2328,17 @@ function toggleCustomPresetContainerVisibility() {
 }
 
 function populateDropdowns(cameras) {
+    const zoomOptions = [0, 10, 20, 40, 50, 60, 70, 80, 90, 150, 200, 300, 400]; // Define your zoom levels here
+
     // Get references to the dropdown elements
     const dropdown1 = document.getElementById('swap-dropdown1');
     const dropdown2 = document.getElementById('swap-dropdown2');
+    const dropdownz = document.getElementById('zoom-dropdown');
 
     // Clear existing options
     dropdown1.innerHTML = '';
     dropdown2.innerHTML = '';
+    dropdownz.innerHTML = '';
 
     // Create a default option for each dropdown
     const defaultOption = document.createElement('option');
@@ -2331,6 +2346,7 @@ function populateDropdowns(cameras) {
     defaultOption.textContent = '-Select-';
     dropdown1.appendChild(defaultOption.cloneNode(true));
     dropdown2.appendChild(defaultOption.cloneNode(true));
+    dropdownz.appendChild(defaultOption.cloneNode(true));
 
     // Populate dropdowns with camera options
     cameras.forEach(camera => {
@@ -2342,6 +2358,17 @@ function populateDropdowns(cameras) {
         // Append the option to both dropdowns
         dropdown1.appendChild(option.cloneNode(true));
         dropdown2.appendChild(option.cloneNode(true));
+    });
+
+    // Populate zoom dropdown
+    zoomOptions.forEach(zoom => {
+        // Create an option element for each zoom option
+        const option = document.createElement('option');
+        option.value = zoom;
+        option.textContent = `${zoom}%`;
+
+        // Append the option to the zoom dropdown
+        dropdownz.appendChild(option.cloneNode(true));
     });
 }
 
@@ -2490,6 +2517,28 @@ function sendZoom() {
     // Clear the input values
     document.getElementById('zoomInput').value = '';
     document.getElementById('zoomSlider').value = 0;
+}
+
+function sendZoomR() {
+    const zoomTextBoxValue = document.getElementById('zoomRInput').value || '100';
+    const zoomDropdownValue = document.getElementById('zoom-dropdown').value.trim();
+    let zoom = '';
+
+    if (zoomDropdownValue !== 'option1') {
+        // If the zoom dropdown has a value other than "-Select-", use those values
+        zoom = zoomDropdownValue;
+    } else {
+        // If the dropdown has not had a value selected, use the value in the text box
+        // If the text box is also empty, it will default to 100 to not change the zoom
+        zoom = zoomTextBoxValue;
+    }
+
+    const command = `!ptzzoomr ${selectedCamera.toLowerCase()} ${zoom}`;
+    sendCommand(command);
+
+    // Clear the input values
+    document.getElementById('zoomRInput').value = '';
+    document.getElementById('zoom-dropdown').value = 'option1';
 }
 
 function sendpadZoom(action) {

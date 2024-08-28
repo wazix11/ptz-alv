@@ -117,17 +117,41 @@
                 </div>
 
                 <!-- Zoom input buttons -->
-                <div class="direction-container">
+                <div class="direction-container" id="zoomContainer">
                     <h2 class="direction-heading" style="cursor: pointer;"
-                        onclick="toggleDirectionPad('.zoom-container')">- Zoom - </h2>
-                    <div class="zoom-container">
-                        <div class="zoom-slider-wrapper">
-                            <input type="range" min="-100" max="100" value="0" step="5" class="slider" id="zoomSlider">
-                            <input type="text" id="zoomInput" class="zoominput" placeholder="Zoom" min="1" max="100">
+                        onclick="toggleDirectionPad('.zoom-menu-outer')">- Zoom -</h2>
+                    <div class="zoom-menu-outer">
+                        <div class="zoom-heading-container">
+                            <h2 class="zoomr-heading" id="zoomrHeading" style="cursor: pointer;"
+                                onclick="toggleZoomMenu('.zoomr-menu'); setActiveHeading('.zoomr-heading');">Zoom %
+                            </h2>
+                            <h2 class="zoom-heading" id="zoomHeading" style="cursor: pointer;"
+                                onclick="toggleZoomMenu('.zoom-menu'); setActiveHeading('.zoom-heading');">Zoom +/-
+                            </h2>
                         </div>
-                        <div class="ptz-input-wrapper">
+                        <div class="zoom-menu-inner">
+                            <div class="zoomr-menu">
+                                <div class="zoom-dropdown-wrapper">
+                                    <div class="zoom-dropdown">
+                                        <select id="zoom-dropdown">
+                                            <option value="option1">-Select-</option>
+                                        </select>
+                                    </div>
+                                    <input type="text" id="zoomRInput" class="zoominput" placeholder="Zoom" min="0" max="1000">
+                                </div>
+                                <button class="send-button-zoom" onclick="sendZoomR()" onmousedown="animateButton(this)">Send</button>
+                            </div>
+
+                            <div class="zoom-menu hidden">
+                                <div class="zoom-slider-wrapper">
+                                    <input type="range" min="-100" max="100" value="0" step="5" class="slider" id="zoomSlider">
+                                    <input type="text" id="zoomInput" class="zoominput" placeholder="Zoom" min="1" max="100">
+                                </div>
+                                <button class="send-button-zoom" onclick="sendZoom()" onmousedown="animateButton(this)">Send</button>
+                            </div>
+
+                            
                         </div>
-                        <button class="send-button" onclick="sendZoom()" onmousedown="animateButton(this)">Send</button>
                     </div>
                 </div>
 
