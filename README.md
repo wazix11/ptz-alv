@@ -23,6 +23,6 @@ The tool was originally created by Dansza.
 
 - Under "Inteface Settings" tick "Enable Full PTZ Perms" if you have ptzmove / ptztilt etc perms.
 
-# Upgrade NOTE:
-  Do not overwrite your existing config.json, public/cameras.json, and public/custom-presets.json files with the template files from GitHub.
-  These files contain your custom configurations and presets. Overwriting them will revert your settings to the default values provided in the template files.
+## Upgrade NOTE:
+Do not overwrite your existing config.json, public/cameras.json, and public/custom-presets.json files with the template files from GitHub.
+These files contain your custom configurations and presets. Overwriting them will revert your settings to the default values provided in the template files.
