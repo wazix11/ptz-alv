@@ -1364,7 +1364,6 @@ body {
     border: none; /* Remove the border */
     border-radius: 5px; /* Apply border radius */
     font-size: 12px; /* Set font size */
-    margin-right: 10px; /* Adjust spacing between input boxes */
     text-align: center; /* Center the text horizontally */
     caret-color: white; /* Change the cursor color */
     
@@ -1405,6 +1404,7 @@ body {
     border-radius: 5px;
     cursor: pointer;
     font-size: 20px;
+    margin-right: 10px; /* Adjust spacing between input boxes */
     background-image: url('/img/focus_auto.svg');
     background-size: 100% 100%; /* Stretch the image to fill the button */
     background-repeat: no-repeat; /* Ensure the background image does not repeat */

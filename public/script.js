@@ -2573,18 +2573,7 @@ function sendIRcommand(selected) {
 }
 
 function sendReset() {
-    if (selectedCamera.toLowerCase() === "marmin") {
-        cam = "marmosetindoor";
-    } else if (selectedCamera.toLowerCase() === "marmout") {
-        cam = "marmoset";
-    } else if (selectedCamera.toLowerCase() === "crowin") {
-        cam = "crowindoor";
-    } else if (selectedCamera.toLowerCase() === "crowout") {
-        cam = "crow";
-    } else {
-        cam = selectedCamera.toLowerCase();
-    }
-
+    cam = selectedCamera.toLowerCase();
     const command = `!resetcam ${cam}`;
     sendCommand(command);
 }
@@ -3927,9 +3916,14 @@ function sendclickCommand(scaledX, scaledY, zoom) {
 
     // Get the zoom input
     const zoomInput = document.getElementById('zoomInput');
+    const zoomRInput = document.getElementById('zoomRInput');
 
     // Check if zoom parameter is not provided, so use the value from zoomInput
-    const inputValue = zoomInput ? zoomInput.value.trim() : '';
+    const inputValue = zoomRInput
+        ? zoomRInput.value.trim()
+        : zoomInput
+        ? zoomInput.value.trim()
+        : '';
     const zoomLevel = zoom !== undefined ? zoom : (inputValue === '' ? 100 : parseInt(inputValue, 10));
 
     let intX = parseInt(scaledX, 10);
@@ -3958,6 +3952,9 @@ function sendclickCommand(scaledX, scaledY, zoom) {
         document.getElementById('zoomInput').value = '';
         document.getElementById('zoomInput').blur();
         document.getElementById('zoomSlider').value = 0;
+        document.getElementById('zoomRInput').value = '';
+        document.getElementById('zoomRInput').blur();
+        document.getElementById('zoom-dropdown').value = 'option1';
     } else {
         console.error("Failed to fetch valid pan, tilt, or zoom values. PTZ command not sent.");
     }
@@ -3970,6 +3967,20 @@ const zoomInput = document.getElementById('zoomInput');
 slider.addEventListener('input', function () {
     // Update the value of the text input with the value of the slider
     zoomInput.value = this.value;
+});
+
+// Get references to the dropdown and text input
+const zoomRDropdown = document.getElementById('zoom-dropdown');
+const zoomRInput = document.getElementById('zoomRInput');
+
+// Add a change event listener to the dropdown
+zoomRDropdown.addEventListener('click', function () {
+    // Update the value of the text input with the value of the dropdown
+    if (this.value !== 'option1') {
+        zoomRInput.value = this.value;
+    } else {
+        zoomRInput.value = '';
+    }
 });
 
 // Event listener for preset search input
