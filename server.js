@@ -741,7 +741,7 @@ function processQueue() {
             let message = messageQueue.shift();
 
             // Check if the command contains !ptzmove and matches the last command
-            if ((message.includes('!ptzmove') || message.includes('!ptzclick') || message.includes('!ptzspin') || message.includes('!ptzareazoom') || message.includes('!ptzzoom') || message.includes('!ptzfocusr') || message.includes('!ptzset') || message.includes('!swap')) && message === lastCommand) {
+            if ((message.includes('!ptzmove') || message.includes('!ptzclick') || message.includes('!ptzspin') || message.includes('!ptzcfocus') || message.includes('!ptzareazoom') || message.includes('!ptzzoom') || message.includes('!ptzfocusr') || message.includes('!ptzset') || message.includes('!swap')) && message === lastCommand) {
                 message += " ."; // Add " ." to the end of the message
             }
 

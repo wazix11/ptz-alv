@@ -26,6 +26,10 @@ function loadcheck() {
     const savedMPVCheckboxState = localStorage.getItem('MPVCheckboxState');
     const isMPVEnabled = savedMPVCheckboxState === 'true';
     toggleMPV(isMPVEnabled);
+    // Check if cFocus Button is enabled and hide / show
+    const savedCFocusCheckboxState = localStorage.getItem('cFocusCheckboxState');
+    const isCFocusEnabled = savedCFocusCheckboxState === 'true';
+    toggleCFocus(isCFocusEnabled);
 }
 
 // Load and set collapsed state of boxes on page load
@@ -128,6 +132,16 @@ function toggleMPV(isVisible) {
         mpvbutton.style.display = isVisible ? 'block' : 'none';
     } else {
         console.error('mpv-button element not found.');
+    }
+}
+
+// Function to toggle the visibility of the cfocus button 
+function toggleCFocus(isVisible) {
+    const cfocusbutton = document.getElementsByClassName('cfocus-button')[0];
+    if (cfocusbutton) {
+        cfocusbutton.style.display = isVisible ? 'block' : 'none';
+    } else {
+        console.error('cfocus-button element not found.');
     }
 }
 
@@ -1793,7 +1807,7 @@ document.addEventListener('keydown', (e) => {
 }
 
 
-function loadcliczoomkoverlay() {
+function loadclickzoomoverlay() {
     const clickOverlay = document.getElementById("clickoverlay");
     if (!clickOverlay) {
         console.error("Click-overlay element not found.");
@@ -3027,7 +3041,60 @@ function handlePtzSpin(event) {
     }
 }
 
-function handlePtzSpinStop(event) {
+// cfocus
+let focusSpeed = 0;
+let inputIsFocus = 1;
+
+function handlePtzCFocus(event) {
+
+    // Check if the target element is an input box or textarea
+    if (event.target.tagName.toLowerCase() === 'input' || event.target.tagName.toLowerCase() === 'textarea') {
+        // Allow default behavior of arrow keys inside input boxes and textareas
+        return;
+    }
+    event.preventDefault(); // Prevent default only for arrow keys outside input boxes and textareas
+
+    if (event.repeat) return; // Ignore repeated events
+
+    switch (event.key) {
+        case ',':
+            focusSpeed = -1; // Start focusing closer to cam
+            ptzCFocus(focusSpeed);
+            inputIsFocus = 1;
+            break;
+        case '.':
+            focusSpeed = 1; // Start focusing further from cam
+            ptzCFocus(focusSpeed);
+            inputIsFocus = 1;
+            break;
+        case '1':
+            // Adjust speed to a low setting
+            focusSpeed = focusSpeed > 0 ? 1 : (focusSpeed < 0 ? -1 : focusSpeed);
+            inputIsFocus = 2;
+            ptzCFocus(focusSpeed);
+            break;
+        case '2':
+            // Adjust speed to a medium setting
+            focusSpeed = focusSpeed > 0 ? 2 : (focusSpeed < 0 ? -2 : focusSpeed);
+            inputIsFocus = 2;
+            ptzCFocus(focusSpeed);
+            break;
+        case '3':
+            // Adjust speed to a high setting
+            focusSpeed = focusSpeed > 0 ? 5 : (focusSpeed < 0 ? -5 : focusSpeed);
+            inputIsFocus = 2;
+            ptzCFocus(focusSpeed);
+            break;
+        case '4':
+            // Adjust speed to a high setting
+            focusSpeed = focusSpeed > 0 ? 10 : (focusSpeed < 0 ? -10 : focusSpeed);
+            inputIsFocus = 2;
+            ptzCFocus(focusSpeed);
+            break;
+    }
+}
+
+function handleKeyUp(event) {
     const isSpinEnabled = localStorage.getItem('isSpinEnabled') === 'true';
 
     // Check if event.key is in arrowKeys or plusminusKeys and isSpinEnabled is true
@@ -3054,6 +3121,19 @@ function handlePtzSpinStop(event) {
                 break;
         }
     }
+
+    const isCFocusEnabled = localStorage.getItem('isCFocusEnabled') === 'true';
+
+    if (isCFocusEnabled) {
+        // Event listener for keyup
+        switch (event.key) {
+            case ',':
+            case '.':
+                focusSpeed = 0; // Stop focus change
+                ptzCFocus(focusSpeed);
+                break;
+        }
+    }
 }
 
 function handleHotkeyswap(event) {
@@ -3062,19 +3142,19 @@ function handleHotkeyswap(event) {
 
     let command = '';
     switch (event.key) {
-        case '2':
+        case '2' || '@': // Shift + 2
             command = '!swap 1 2';
             break;
-        case '3':
+        case '3' || '#': // Shift + 3
             command = '!swap 1 3';
             break;
-        case '4':
+        case '4' || '$': // Shift + 4
             command = '!swap 1 4';
             break;
-        case '5':
+        case '5' || '%': // Shift + 5
             command = '!swap 1 5';
             break;
-        case '6':
+        case '6' || '^': // Shift + 6
             command = '!swap 1 6';
             break;
     }
@@ -3092,6 +3172,11 @@ function handleHotkeyswap(event) {
     //}, 3000);
 }
 
+function ptzCFocus(focusSpeed) {
+    const command = `!ptzcfocus ${selectedCamera.toLowerCase()} ${focusSpeed}`;
+    sendCommand(command);
+}
+
 function ptzSpin(panSpeed, tiltSpeed, zoomSpeed) {
     const command = `!ptzspin ${selectedCamera.toLowerCase()} ${panSpeed} ${tiltSpeed} ${zoomSpeed} `;
     sendCommand(command);
@@ -3100,7 +3185,7 @@ function ptzSpin(panSpeed, tiltSpeed, zoomSpeed) {
 
 // Attach the handleKeyDown function to the keydown event
 document.addEventListener('keydown', handleKeyDown);
-document.addEventListener('keyup', handlePtzSpinStop);
+document.addEventListener('keyup', handleKeyUp);
 
 let keysPressed = ''; // Keep track of the keys pressed
 const delay = 1000; // Adjust the delay as needed
@@ -3110,7 +3195,7 @@ let timeoutId; // Keep track of the setTimeout ID
 function handleKeyDown(event) {
     // Check if the arrow key checkbox state is stored in local storage
     const savedArrowKeyCheckboxState = localStorage.getItem('arrowKeyCheckboxState');
-    const savedAswapHotkeyCheckboxState = localStorage.getItem('swapHotkeyCheckboxState');
+    const savedSwapHotkeyCheckboxState = localStorage.getItem('swapHotkeyCheckboxState');
 
     if (savedArrowKeyCheckboxState !== 'true') {
         return; // Exit the function if checkbox is not checked (or if the state is not found in local storage)
@@ -3136,7 +3221,23 @@ function handleKeyDown(event) {
         return;
     }
 
-    if ((savedAswapHotkeyCheckboxState == 'true') && (event.ctrlKey && event.key >= '2' && event.key <= '6')) {
+    const focusfarnearkeys = [',', '.'];
+    const isCFocusEnabled = localStorage.getItem('isCFocusEnabled') === 'true';
+
+    if (focusfarnearkeys.includes(event.key) && isCFocusEnabled) {
+        handlePtzCFocus(event);
+        return;
+    }
+
+    if (numberKeys.includes(event.key) && inputIsFocus == 2) {
+        handlePtzCFocus(event);
+        return;
+    }
+
+    // Enable Shift + number key to work for swap, Ctrl + number also works
+    // Shift + number may be unintuitive if Shift + 2 doesn't correspond with @ and so on with some keyboards
+    const swapKeys = ['@', '#', '$', '%', '^']
+    if ((savedSwapHotkeyCheckboxState == 'true') && (swapKeys.includes(event.key) || (event.ctrlKey && event.key >= '2' && event.key <= '6'))) {
         // Ctrl key is held and a number key (2-6) is pressed
         handleHotkeyswap(event);        
     }
@@ -3743,14 +3844,7 @@ function handleMusicUnmute(currentVolume) {
 
 window.addEventListener('load', function() {
     localStorage.setItem('isSpinEnabled', 'false');
-
-    let isSpinEnabled = localStorage.getItem('isSpinEnabled') === 'true';
-    let button = document.getElementById('spinButton');
-    if (isSpinEnabled) {
-        button.classList.add('highlighted');
-    } else {
-        button.classList.remove('highlighted');
-    }
+    localStorage.setItem('isCFocusEnabled', 'false');
 });
 
 function enableSpin(button) {
@@ -3765,6 +3859,20 @@ function enableSpin(button) {
         button.classList.remove('highlighted');
     }
     console.log('New state: ', localStorage.getItem('isSpinEnabled') === 'true' ? 'Enabled' : 'Disabled');
+}
+
+function enableCFocus(button) {
+    let isCFocusEnabled = localStorage.getItem('isCFocusEnabled') === 'true';
+    if (!isCFocusEnabled) {
+        console.log('CFocus Enabled.');
+        localStorage.setItem('isCFocusEnabled', 'true');
+        button.classList.add('highlighted');
+    } else {
+        console.log('CFocus Disabled.');
+        localStorage.setItem('isCFocusEnabled', 'false');
+        button.classList.remove('highlighted');
+    }
+    console.log('New state: ', localStorage.getItem('isCFocusEnabled') === 'true' ? 'Enabled' : 'Disabled');
 }
 
 

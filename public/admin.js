@@ -167,30 +167,36 @@ function showInterfaceSettings() {
                 <input type="checkbox" class="edit-checkbox" id="thumbnailCheckbox" checked>
                 </td>
             </tr>
-             <tr>
+            <tr>
                 <td><label class="field-label">Show camera Thumbnails</label></td>
                 <td>
                 <input type="checkbox" class="edit-checkbox" id="CamerathumbnailCheckbox" checked>
                 </td>
             </tr>
-             <tr>
+            <tr>
                 <td><label class="field-label">Enable Hotkeys</label></td>
                 <td>
                 <input type="checkbox" class="edit-checkbox" id="arrowKeyCheckbox" checked>
                 </td>
             </tr>
-             <tr>
+            <tr>
                 <td><label class="field-label">Enable Swap hotkeys</label></td>
                 <td>
                 <input type="checkbox" class="edit-checkbox" id="swapHotkeyCheckbox" checked>
                 </td>
             </tr>            
-             <tr>
+            <tr>
                 <td><label class="field-label">Enable Continuous Move</label></td>
                 <td>
                 <input type="checkbox" class="edit-checkbox" id="MPVCheckbox" checked>
                 </td>
             </tr>            
+            <tr>
+                <td><label class="field-label">Enable Continuous Focus</label></td>
+                <td>
+                <input type="checkbox" class="edit-checkbox" id="cFocusCheckbox" checked>
+                </td>
+            </tr> 
             <tr>
                 <td><label class="field-label">Enable Full PTZ Perms</label></td>
                 <td>
@@ -269,6 +275,29 @@ document.getElementById('interfaceSettingsLink').addEventListener('click', funct
         // Call toggleMPV function (optional) based on initial state
         if (typeof toggleMPV === 'function') {
             toggleMPV(isChecked);
+        }
+    });
+
+    setupCheckbox('cFocusCheckbox', 'cFocusCheckboxState', (isChecked) => {
+        const fullPTZCheckbox = document.getElementById('FullPTZCheckbox');
+        const cFocusCheckbox = document.getElementById('cFocusCheckbox');
+
+        // Disable and grey out cFocusCheckbox based on Full PTZ state
+        cFocusCheckbox.disabled = !fullPTZCheckbox.checked;
+        cFocusCheckbox.style.opacity = fullPTZCheckbox.checked ? 1 : 0.5;
+
+        // Uncheck cFocusCheckbox only when FullPTZCheckbox is unchecked
+        if (!fullPTZCheckbox.checked) {
+            cFocusCheckbox.checked = false;
+            localStorage.setItem('cFocusCheckboxState', 'false'); // Update localStorage
+
+        }
+
+
+
+        // Call toggleCFocus function (optional) based on initial state
+        if (typeof toggleCFocus === 'function') {
+            toggleCFocus(isChecked);
         }
     });
 

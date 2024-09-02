@@ -1357,7 +1357,7 @@ body {
 
     
 .focus-input {
-    width: 76px; /* Set the width to match the direction-pad buttons */
+    width: 50px; /* Set the width to match the direction-pad buttons */
     height: 50px; /* Set the height to match the direction-pad buttons */
     background-color: #3C3C3C; /* Set the background color */
     color: white; /* Set the text color */
@@ -1395,8 +1395,33 @@ body {
     background-color: #1e88e5; /* Highlight color on hover */
 }
 
+.cfocus-button {
+    width: 50px;
+    height: 50px;
+    background-color: #3C3C3C;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 20px;
+    margin-right: 10px; /* Adjust spacing between input boxes */
+    background-image: url('/img/cfocus.webp');
+    background-size: 100% 100%; /* Stretch the image to fill the button */
+    background-repeat: no-repeat; /* Ensure the background image does not repeat */
+    box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+}
+
+.cfocus-button:hover {
+    background-color: #1e88e5; /* Highlight color on hover */
+}
+
+.cfocus-button.highlighted {
+    /* Add your highlighted styles here */
+    background-color: #40c015; /* Highlight color on hover */
+}
+
 .autofocus-button {
-    width: 76px;
+    width: 50px; /* 76px */
     height: 50px;
     background-color: #3C3C3C;
     color: white;
@@ -1433,7 +1458,7 @@ body {
 }
 
 .volume-button {
-    width: 55px;
+    width: 50px;
     height: 50px;
     background-color: #3C3C3C;
     color: white;
@@ -1453,7 +1478,7 @@ body {
 
 .mpv-button {
     margin-left: 10px; /* Adjust the margin to increase or decrease the space between buttons */
-    width: 55px;
+    width: 50px;
     height: 50px;
     background-color: #3C3C3C;
     color: white;
@@ -1477,7 +1502,7 @@ body {
 
 .reset-button {
     margin-left: 10px; /* Adjust the margin to increase or decrease the space between buttons */
-    width: 55px;
+    width: 50px;
     height: 50px;
     background-color: #3C3C3C;
     color: white;

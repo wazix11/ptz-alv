@@ -216,6 +216,7 @@
                         onclick="toggleDirectionPad('.focus-container')">- Focus -</h2>
                     <div class="focus-container">
                         <div class="focus-wrapper">
+                            <button class="cfocus-button" onclick="enableCFocus(this)" style="display: none;"></button>
                             <button class="autofocus-button" onclick="sendAutoFocusCommand()"></button>
                             <input type="text" id="focus" class="focus-input" placeholder="Focus">
                         </div>
@@ -247,7 +248,6 @@
                             <button class="volume-button" onclick="sendVolumeControl()"></button>
                             <button class="reset-button" onclick="sendReset()"></button>
                             <button class="mpv-button" onclick="enableSpin(this)" style="display: none;"></button>
-
                         </div>
                     </div>
                 </div>
