@@ -21,7 +21,7 @@ The tool was originally created by Dansza.
 - Click the Settings cog next to "Alveus PTZ" and then "Twitch Settings".
   Enter your twitch name and OAuth key
 
-- Under "Inteface Settings" tick "Enable Full PTZ Perms" if you have ptzmove / ptztilt etc perms.
+- Under "Interface Settings" tick "Enable Full PTZ Perms" if you have ptzmove / ptztilt etc perms.
 
 ## Upgrade NOTE:
 Do not overwrite your existing config.json, public/cameras.json, and public/custom-presets.json files with the template files from GitHub.
