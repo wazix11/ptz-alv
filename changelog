@@ -1,3 +1,10 @@
+v1.8
+ - Updated wolf/wolfcorner/wolfin presets, hotkeys, and images.
+ - Added thumbnail images to various presets (credit to bagel).
+ - Added ptzzoomr option to the side zoom menu with the ability to toggle to regular zoom.
+ - Added continuous focus option to the focus menu, can be toggled in interface settings.
+ - Added ability to swap cams using Shift + number in addition to Ctrl + number.
+
 v1.7
  - Added zoom dialog for normal clicks (when you click and hold a dialog with zoom values will appear)
  - Removed the top bar and made the video window fixed in place.
