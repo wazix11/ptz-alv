@@ -3,6 +3,8 @@ let selectedCamera = ''; // Initialize selected camera as empty string
 let camerasData = null; // Initialize variable to store camera data
 const storedTwitchURL = localStorage.getItem('twitchURL');
 twitchURL = storedTwitchURL;
+const storedllURL = localStorage.getItem('llURL');
+llURL = storedllURL;
 
 window.onload = function () {
     loadcheck();
@@ -348,7 +350,10 @@ async function fetchTwitchURL() {
         .then(data => {
             // Update the global variable with the fetched URL
             twitchURL = data.twitch.url || 'https://player.twitch.tv/?channel=alveussanctuary&parent=localhost';
-            localStorage.setItem('twitchURL', twitchURL);            
+            localStorage.setItem('twitchURL', twitchURL);
+
+            llURL = data.twitch.llurl || 'Not Available';
+            localStorage.setItem('llURL', llURL);
         })
         .catch(error => console.error('Error fetching Twitch settings:', error));
 }
@@ -754,14 +759,6 @@ document.addEventListener('DOMContentLoaded', function () {
             toggleOverlayZIndex();
         });
 
-        const button5 = document.createElement("button");
-        button5.classList.add("vidbutton5");
-        button5.textContent = "Grid";
-        button5.classList.add("highlighted"); // Add a class to indicate highlighted state
-        button5.addEventListener('click', function () {
-            toggleGrid();
-        });
-
         const button4 = document.createElement("button");
         button4.classList.add("vidbutton4");
         button4.textContent = "Click On";
@@ -771,12 +768,21 @@ document.addEventListener('DOMContentLoaded', function () {
             updateClickButtonLabel();
         });
 
-        // Create a container for the left buttons
-        const leftButtonDiv = document.createElement("div");
-        leftButtonDiv.classList.add("left-buttons");
-        leftButtonDiv.appendChild(button2);
-        buttonDiv.appendChild(leftButtonDiv);
-        buttonDiv.appendChild(button3);
+        const button5 = document.createElement("button");
+        button5.classList.add("vidbutton5");
+        button5.textContent = "Grid";
+        button5.classList.add("highlighted"); // Add a class to indicate highlighted state
+        button5.addEventListener('click', function () {
+            toggleGrid();
+        });
+
+        const button6 = document.createElement("button");
+        button6.classList.add("vidbutton6");
+        button6.textContent = "Toggle Feed";
+        button6.addEventListener('click', function () {
+            toggleFeed();
+        });
+        if (llURL === 'Not Available') button6.style.visibility = 'hidden'; // Button isn't needed if another feed isn't added
 
         const videoContainer = document.createElement("div");
         videoContainer.id = "video-container";
@@ -790,8 +796,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         const iframe = document.createElement("iframe");
         iframe.id = "twitchIframe";
-        iframe.src = twitchURL;
-        iframe.frameBorder = "0";
+        iframe.src = llURL !== 'Not Available' ? llURL : twitchURL;
         iframe.allow = "autoplay; fullscreen";
         iframe.allowFullscreen = true;
         iframe.style.width = '99%';
@@ -832,6 +837,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
         buttonDiv.appendChild(button2);
+        buttonDiv.appendChild(button6);
         buttonDiv.appendChild(button3);
         buttonDiv.appendChild(button4);
         buttonDiv.appendChild(button5);
@@ -942,6 +948,16 @@ const toggleGrid = () => {
 
     }
 
+};
+
+const toggleFeed = () => {
+    const iframe = document.getElementById('twitchIframe');
+
+    if (iframe.src === twitchURL && llURL !== 'Not Available') {
+        iframe.src = llURL;
+    } else if (iframe.src === llURL) {
+        iframe.src = twitchURL;
+    }
 };
 
 function updateClickButtonLabel() {

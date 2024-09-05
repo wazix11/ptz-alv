@@ -157,6 +157,7 @@ body {
     width: 1120px; /* Set the fixed width */
     height: 780px; /* Set the fixed height */
     overflow: hidden; /* Prevents scrollbars if content overflows */
+    border: 0px;
 }
 
 .video-active {
@@ -1783,17 +1784,10 @@ body {
     align-items: center;              /* Vertically center the buttons */
     width: 100%;                       /* Full width to avoid overflow */
     box-sizing: border-box;           /* Include padding in the container’s width */
-    padding: 0 10px;                  /* Optional padding for spacing */
+    padding: 0 0px;                  /* Optional padding for spacing */
     margin-bottom: -35px;
     margin-top: 10px;
     zoom: 90%;
-}
-
-/* Style for button group on the left */
-.left-buttons {
-    display: flex;                    /* Use Flexbox for button grouping */
-    gap: 15px;                        /* Gap between buttons; adjust as needed */
-    margin-left: -15px;               /* Move the left button group 20px to the left */
 }
 
 /* General button styles */
@@ -1833,32 +1827,33 @@ body {
 }
 
 .vidbutton2 {
-    margin-left: 5px;
+    margin-left: -7px;
 }
 
 #commandDisplay {
     margin-right: 100px;  /* Push this button to the far right */
-
 }
 .vidbutton3 {
     margin-left: auto;  /* Push this button to the far right */
     margin-right: 10px; /* Adjust this value to move button3 closer to the center */
 }
 .vidbutton4 {
-    margin-right: 15px; /* Adjust this value to move button3 closer to the center */
-
+    margin-right: 10px; /* Adjust this value to move button3 closer to the center */
 }
 
 .vidbutton5 {
-    margin-right: 15px; /* Adjust this value to move button3 closer to the center */
+    margin-right: 20px; /* Adjust this value to move button3 closer to the center */
+}
 
+.vidbutton6 {
+    margin-left: 10px; /* Adjust this value to move button3 closer to the center */
 }
 
 .vidbutton3.highlighted, .vidbutton4.highlighted, .vidbutton5.highlighted  {
     background-color: #1565c0; /* Highlight color for button3 */
 }
 
-.vidbutton:hover, .vidbutton2:hover, .vidbutton3:hover, .vidbutton4:hover {
+.vidbutton:hover, .vidbutton2:hover, .vidbutton3:hover, .vidbutton4:hover, .vidbutton5:hover, .vidbutton6:hover {
     background-color: #1e88e5;
 }
   .camera-button {

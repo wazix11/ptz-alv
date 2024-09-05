@@ -22,14 +22,15 @@ function fetchTwitchSettings() {
             const twitchChannelElement = document.getElementById('twitchChannel');
             const twitchOAuthKeyElement = document.getElementById('twitchOAuthKey');
             const twitchURLElement = document.getElementById('twitchURL');
+            const llURLElement = document.getElementById('llURL');
 
-
-            if (twitchUsernameElement && twitchChannelElement && twitchOAuthKeyElement && twitchURLElement) {
+            if (twitchUsernameElement && twitchChannelElement && twitchOAuthKeyElement && twitchURLElement && llURLElement) {
                 // Populate the paragraph elements with the fetched settings
                 twitchUsernameElement.textContent = data.twitch.username || 'Not Available';
                 twitchChannelElement.textContent = data.twitch.channel || 'Not Available';
                 twitchOAuthKeyElement.textContent = data.twitch.oauthKey || 'Not Available';
                 twitchURLElement.textContent = data.twitch.url || 'Not Available';
+                llURLElement.textContent = data.twitch.llurl || 'Not Available';
 
             } else {
                 console.error('One or more Twitch settings elements not found.');
@@ -50,6 +51,9 @@ function editField(fieldId) {
     if (fieldId === 'twitchURL' && (newValue === '' || newValue === null)) {
         newValue = 'https://player.twitch.tv/?channel=alveussanctuary&parent=localhost'; // Default value
     }
+    if (fieldId === 'llURL' && (newValue === '' || newValue === null)) {
+        newValue = 'Not Available'; // Default value
+    }
 
     // Ensure the fieldValue is updated with the correct newValue
     fieldValue.innerText = newValue;
@@ -64,7 +68,7 @@ function saveTwitchSettings() {
     const twitchChannel = document.getElementById('twitchChannel').innerText;
     const twitchOAuthKey = document.getElementById('twitchOAuthKey').innerText;
     const twitchURL = document.getElementById('twitchURL').innerText;
-
+    const llURL = document.getElementById('llURL').innerText;
 
     // Make an API call to save the updated Twitch settings
     fetch('/save-twitch-settings', {
@@ -76,7 +80,8 @@ function saveTwitchSettings() {
             username: twitchUsername,
             channel: twitchChannel,
             oauthKey: twitchOAuthKey,
-            url: twitchURL
+            url: twitchURL,
+            llurl: llURL
         })
     })
         .then(response => {
@@ -125,10 +130,15 @@ function showTwitchSettings() {
                 <td><p id="twitchOAuthKey" class="field-value"></p></td>
                 <td><button class="edit-button" onclick="editField('twitchOAuthKey')">Edit</button></td>
             </tr>
-             <tr>
+            <tr>
                 <td><label class="field-label">Stream URL</label></td>
                 <td><p id="twitchURL" class="field-value"></p></td>
                 <td><button class="edit-button" onclick="editField('twitchURL')">Edit</button></td>
+            </tr>
+            <tr>
+                <td><label class="field-label">Low Latency URL</label></td>
+                <td><p id="llURL" class="field-value"></p></td>
+                <td><button class="edit-button" onclick="editField('llURL')">Edit</button></td>
             </tr>
         </table>
     `;

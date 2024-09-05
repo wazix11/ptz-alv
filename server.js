@@ -61,13 +61,14 @@ app.get('/twitch-settings', (req, res) => {
 
 // Endpoint to save Twitch settings
 app.post('/save-twitch-settings', (req, res) => {
-    const { username, channel, oauthKey, url } = req.body;
+    const { username, channel, oauthKey, url, llurl } = req.body;
 
     // Update only the fields that were edited
     if (username) config.twitch.username = username;
     if (channel) config.twitch.channel = channel;
     if (oauthKey) config.twitch.oauthKey = oauthKey;
     if (url) config.twitch.url = url;
+    if (llurl) config.twitch.llurl = llurl;
 
     // Write updated configuration back to config.json
     fs.writeFile('./config.json', JSON.stringify(config, null, 4), (err) => {
