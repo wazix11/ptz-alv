@@ -7,6 +7,10 @@ The tool was originally created by Dansza.
 
 - Install Nodejs https://nodejs.org
 
+- Open the Code dropdown (green button) and click "Download ZIP".
+
+- Extract the files and move the folder to your desired location.
+
 - Run install.bat or "npm install" to install the Nodejs dependencies.
 
 - Create Twitch OAuth key to use within the server.
