@@ -87,7 +87,9 @@
     "humanright": "hr",
     "platformcenter": "pc",
     "platformleft": "pl",
-    "platformright": "pr"
+    "platformright": "pr",
+    "left": "l",
+    "right": "r"
   },
   "Pasture": {
     "angel": "a",
@@ -238,7 +240,9 @@
     "tree": "t",
     "treeb": "tb",
     "treet": "tt",
-    "water": "w"
+    "water": "w",
+    "groundl": "gl",
+    "groundr": "gr"
   },
   "MarmIn": {
     "bowll": "bl",

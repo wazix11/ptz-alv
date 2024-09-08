@@ -91,8 +91,8 @@
       "presets": [
         "doors",
         "home",
-        "humanleft",
-        "humanright",
+        "left",
+        "right",
         "platformcenter",
         "platformleft",
         "platformright"
@@ -261,8 +261,8 @@
         "entry",
         "escape",
         "ground",
-        "groundlc",
-        "groundrc",
+        "groundl",
+        "groundr",
         "home",
         "inside",
         "insideperch",
@@ -347,7 +347,9 @@
         "table",
         "top",
         "topshelfl",
-        "topshelfr"
+        "topshelfr",
+        "rightscreen",
+        "rope"
       ]
     },
     {
