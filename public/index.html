@@ -122,12 +122,12 @@
                         onclick="toggleDirectionPad('.zoom-menu-outer')">- Zoom -</h2>
                     <div class="zoom-menu-outer">
                         <div class="zoom-heading-container">
-                            <h2 class="zoomr-heading" id="zoomrHeading" style="cursor: pointer;"
+                            <!-- <h2 class="zoomr-heading" id="zoomrHeading" style="cursor: pointer;"
                                 onclick="toggleZoomMenu('.zoomr-menu'); setActiveHeading('.zoomr-heading');">Zoom %
                             </h2>
                             <h2 class="zoom-heading" id="zoomHeading" style="cursor: pointer;"
                                 onclick="toggleZoomMenu('.zoom-menu'); setActiveHeading('.zoom-heading');">Zoom +/-
-                            </h2>
+                            </h2> -->
                         </div>
                         <div class="zoom-menu-inner">
                             <div class="zoomr-menu">
@@ -137,7 +137,7 @@
                                             <option value="option1">-Select-</option>
                                         </select>
                                     </div>
-                                    <input type="text" id="zoomRInput" class="zoominput" placeholder="Zoom" min="0" max="1000">
+                                    <input type="text" id="zoomRInput" class="zoominput" placeholder="Zoom %" min="0" max="1000">
                                 </div>
                                 <button class="send-button-zoom" onclick="sendZoomR()" onmousedown="animateButton(this)">Send</button>
                             </div>
