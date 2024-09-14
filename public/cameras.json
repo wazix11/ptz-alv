@@ -367,6 +367,21 @@
       ]
     },
     {
+      "name": "Noodle",
+      "presets": [
+        "down",
+        "home",
+        "left",
+        "water",
+        "farbranches",
+        "closebranch"
+      ]
+    },
+    {
+      "name": "Patchy",
+      "presets": []
+    },
+    {
       "name": "Marty",
       "presets": [
         "a",
