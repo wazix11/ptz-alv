@@ -1522,7 +1522,9 @@ body {
     background-color: #1565c0; /* Highlight color on hover */
 }
 
-.ir-auto-button, .ir-on-button, .ir-off-button {
+.ir-auto-button, 
+.ir-on-button, 
+.ir-off-button {
     width: 50px;
     height: 50px;
     background-color: #3C3C3C;
@@ -1539,11 +1541,14 @@ body {
 
 }
 
-.ir-on-button, .ir-off-button  {
+.ir-on-button, 
+.ir-off-button  {
     margin-left: 10px; /* Adjust the margin to increase or decrease the space between buttons */
 }
 
-.ir-auto-button:hover, .ir-on-button:hover, .ir-off-button:hover  {
+.ir-auto-button:hover, 
+.ir-on-button:hover, 
+.ir-off-button:hover  {
     background-color: #1565c0; /* Highlight color on hover */
 }
 
@@ -1834,7 +1839,6 @@ body {
     margin-right: 100px;  /* Push this button to the far right */
 }
 .vidbutton3 {
-    margin-left: auto;  /* Push this button to the far right */
     margin-right: 10px; /* Adjust this value to move button3 closer to the center */
 }
 .vidbutton4 {
@@ -1849,11 +1853,25 @@ body {
     margin-left: 10px; /* Adjust this value to move button3 closer to the center */
 }
 
-.vidbutton3.highlighted, .vidbutton4.highlighted, .vidbutton5.highlighted  {
-    background-color: #1565c0; /* Highlight color for button3 */
+.vidbutton7 {
+    margin-left: auto;  /* Push this button to the far right */
+    margin-right: 10px; /* Adjust this value to move button3 closer to the center */
 }
 
-.vidbutton:hover, .vidbutton2:hover, .vidbutton3:hover, .vidbutton4:hover, .vidbutton5:hover, .vidbutton6:hover {
+.vidbutton3.highlighted, 
+.vidbutton4.highlighted, 
+.vidbutton5.highlighted, 
+.vidbutton7.highlighted  {
+    background-color: #1565c0; /* Highlight color for buttons */
+}
+
+.vidbutton:hover, 
+.vidbutton2:hover, 
+.vidbutton3:hover, 
+.vidbutton4:hover, 
+.vidbutton5:hover, 
+.vidbutton6:hover, 
+.vidbutton7:hover {
     background-color: #1e88e5;
 }
   .camera-button {

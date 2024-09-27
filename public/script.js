@@ -5,6 +5,7 @@ const storedTwitchURL = localStorage.getItem('twitchURL');
 twitchURL = storedTwitchURL;
 const storedllURL = localStorage.getItem('llURL');
 llURL = storedllURL;
+let clickAFOff = false;
 
 window.onload = function () {
     loadcheck();
@@ -784,6 +785,13 @@ document.addEventListener('DOMContentLoaded', function () {
         });
         if (llURL === 'Not Available') button6.style.visibility = 'hidden'; // Button isn't needed if another feed isn't added
 
+        const button7 = document.createElement("button");
+        button7.classList.add("vidbutton7");
+        button7.textContent = "Click AF Off";
+        button7.addEventListener('click', function () {
+            toggleClickAF();
+        });
+
         const videoContainer = document.createElement("div");
         videoContainer.id = "video-container";
         videoContainer.style.position = 'relative';
@@ -838,6 +846,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         buttonDiv.appendChild(button2);
         buttonDiv.appendChild(button6);
+        buttonDiv.appendChild(button7);
         buttonDiv.appendChild(button3);
         buttonDiv.appendChild(button4);
         buttonDiv.appendChild(button5);
@@ -960,10 +969,23 @@ const toggleFeed = () => {
     }
 };
 
+const toggleClickAF = () => {
+    const button7 = document.querySelector('.vidbutton7'); // Adjust selector as needed
+    
+    if (!(button7.classList.contains('highlighted'))) {
+        button7.classList.add('highlighted');
+        clickAFOff = true;
+    } else {
+        button7.classList.remove('highlighted');
+        clickAFOff = false;
+    }
+};
+
 function updateClickButtonLabel() {
     const iframe = document.getElementById("twitchIframe");
     const button4 = document.querySelector('.vidbutton4'); // Adjust selector as needed
     const button3 = document.querySelector('.vidbutton3'); // Adjust selector as needed
+    const button7 = document.querySelector('.vidbutton7'); // Adjust selector as needed
 
 
     // Use getComputedStyle to get the actual zIndex if needed
@@ -973,9 +995,11 @@ function updateClickButtonLabel() {
 
     if (isOverlayOn) {
         button3.style.visibility = 'visible'; // Show button3
+        button7.style.visibility = 'visible'; // Show button7
         button4.classList.add('highlighted');
     } else {
         button3.style.visibility = 'hidden'; // Hide button3
+        button7.style.visibility = 'hidden'; // Hide button7
         button4.classList.remove('highlighted');
     }
 }
@@ -4055,7 +4079,10 @@ function sendclickCommand(scaledX, scaledY, zoom) {
 
     // Construct the command to be sent to Twitch chat
     const ptzareazoomCommand = `!ptzareazoom ${selectedCameraName.toLowerCase()} ${intX} ${intY} ${zoomLevel}`;
-    const ptzclickCommand = `!ptzclick ${intX} ${intY} ${zoomLevel}`;
+    let ptzclickCommand = `!ptzclick ${intX} ${intY} ${zoomLevel}`;
+    if (clickAFOff) {
+        ptzclickCommand += ' off';
+    }
 
     // Only proceed if all required values are defined
     if (scaledX !== undefined && scaledY !== undefined && scaledX > 0 && scaledY > 0) {

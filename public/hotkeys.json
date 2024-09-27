@@ -297,7 +297,15 @@
     "topshelfr": "tsr",
     "rightshelvest": "rst",
     "rightshelvesb": "rsb",
-    "below": "b"
+    "below": "b",
+    "ramp": "ra",
+    "rightscreen": "rs",
+    "rope": "ro",
+    "rightperch": "rp",
+    "rightpostb": "rpb",
+    "post2t": "p2t",
+    "bottomshelfl": "bsl",
+    "bottomshelfr": "bsr"
   },
   "Georgie": {
     "closedirt": "cd",
