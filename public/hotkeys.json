@@ -122,7 +122,9 @@
     "sky": "s",
     "stompyfood": "sf",
     "sunrise": "su",
-    "water": "w"
+    "water": "w",
+    "pole": "i",
+    "gate": "ga"
   },
   "Parrots": {
     "abovedoor": "ad",
@@ -148,7 +150,8 @@
     "macawsw": "mw",
     "platform1": "p1",
     "platform2": "p2",
-    "tablet": "t"
+    "tablet": "t",
+    "chicken": "ch"
   },
   "Fox": {
     "belowplatform": "bp",
@@ -197,7 +200,8 @@
     "hillwide": "hw",
     "hillright": "hr",
     "hillleft": "hl",
-    "den": "d"
+    "den": "d",
+    "bowl": "b"
   },
   "CrowIn": {
     "back": "b",
@@ -216,7 +220,10 @@
     "table": "ta",
     "top": "t",
     "water": "w",
-    "window": "wi"
+    "window": "wi",
+    "backleftcorner": "blc",
+    "training": "tr",
+    "windowc": "wc"
   },
   "CrowOut": {
     "backcorner": "bc",
@@ -242,22 +249,28 @@
     "treet": "tt",
     "water": "w",
     "groundl": "gl",
-    "groundr": "gr"
+    "groundr": "gr",
+    "cornerc": "cc",
+    "cache": "ch",
+    "escape": "es",
+    "stickz": "z",
+    "treebase": "tg",
+    "training": "tr"
   },
   "MarmIn": {
     "bowll": "bl",
-    "bridgecl": "",
+    "bridgecl": "bcl",
     "bridgel": "brl",
     "bridgem": "brm",
-    "bridger": "brr",
+    "bridger": "br",
     "center": "c",
     "cornershelf": "cs",
     "domeleft": "dl",
     "domeright": "dr",
     "down": "d",
-    "flapl": "",
+    "flapl": "fl",
     "flaps": "f",
-    "floor": "fl",
+    "floor": "flr",
     "home": "h",
     "left": "l",
     "pole": "p",
@@ -270,7 +283,9 @@
     "win4": "w4",
     "windows": "w",
     "winl": "wl",
-    "winr": "wr"
+    "winr": "wr",
+    "bowllc": "blc",
+    "bridgerc": "brc"
   },
   "MarmOut": {
     "domel": "dol",
@@ -329,5 +344,35 @@
     "water": "w",
     "farbranches": "fb",
     "closebranch": "cb"
+  },
+  "Marty": {
+    "a": "a",
+    "b": "b",
+    "c": "c",
+    "food1": "s",
+    "food2": "d",
+    "food4": "g",
+    "food5": "h",
+    "party": "p",
+    "food3": "f"
+  },
+  "BB": {
+    "home": "h",
+    "backcenter": "bc",
+    "backcorner": "bcr",
+    "backleft": "bl",
+    "backright": "br",
+    "c": "c",
+    "food": "s",
+    "food1": "d",
+    "food2": "f",
+    "food3": "g",
+    "food4": "j",
+    "food5": "k",
+    "nest": "n",
+    "nest2": "nm",
+    "topright": "tr",
+    "a": "a",
+    "b": "b"
   }
 }
