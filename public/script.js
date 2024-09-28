@@ -1,4 +1,3 @@
-
 let selectedCamera = ''; // Initialize selected camera as empty string
 let camerasData = null; // Initialize variable to store camera data
 const storedTwitchURL = localStorage.getItem('twitchURL');
@@ -2174,6 +2173,27 @@ function selectCamera(cameraName) {
     highlightSelectedCameraButton();
 }
 
+function getHotkey(cameraName, preset, custom) {
+    // Determine the endpoint URL based on whether it's for custom or normal hotkeys
+    const endpoint = custom ? '/custom-hotkeys' : '/hotkeys';
+
+    // Retrieve hotkey data from the server
+    return fetch(endpoint)
+        .then(response => response.json())
+        .then(data => {
+            // Check if the hotkey exists for the provided cameraName and preset
+            if (data[cameraName] && data[cameraName][preset]) {
+                return data[cameraName][preset]; // Return the hotkey if found
+            } else {
+                return null; // Return null if the hotkey doesn't exist
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching hotkey data:', error);
+            return null; // Return null if there's an error
+        });
+}
+
 function populatePresetPad(presets) {
     const presetPad = document.getElementById('presetPad');
     presetPad.innerHTML = ''; // Clear previous preset buttons
@@ -2205,7 +2225,14 @@ function populatePresetPad(presets) {
 
         const button = document.createElement('button');
         button.classList.add('preset-button');
-        button.textContent = preset;
+        getHotkey(selectedCamera, preset, false)
+            .then(hotkey => {
+                if (hotkey != null && hotkey != '') {
+                    button.textContent = preset + ' - ' + hotkey;
+                } else {
+                    button.textContent = preset;
+                }
+            })
         button.addEventListener('click', () => sendLoadCommand(selectedCamera, preset));
 
         image.addEventListener('click', () => button.click());
@@ -2282,7 +2309,14 @@ function populateCustomPresetPad(customPresets) {
 
         const button = document.createElement('button');
         button.classList.add('custom-preset-button');
-        button.textContent = customPreset.presetName;
+        getHotkey(selectedCamera, customPreset.presetName, true)
+            .then(hotkey => {
+                if (hotkey != null && hotkey != '') {
+                    button.textContent = customPreset.presetName + ' - ' + hotkey;
+                } else {
+                    button.textContent = customPreset.presetName;
+                }
+            })
         button.addEventListener('click', () => sendCustomCommand(selectedCamera, customPreset.presetName, customPresets));
 
         image.addEventListener('click', () => button.click());
