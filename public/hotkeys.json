@@ -329,5 +329,23 @@
     "water": "w",
     "farbranches": "fb",
     "closebranch": "cb"
+  },
+  "Toast": {
+    "down": "d",
+    "downright": "dr",
+    "far": "fa",
+    "home": "h",
+    "log": "l",
+    "logz": "lz",
+    "water": "w",
+    "food": "f"
+  },
+  "Patchy": {
+    "closebranches": "cb",
+    "down": "d",
+    "farbranches": "fb",
+    "groundm": "gm",
+    "home": "h",
+    "water": "w"
   }
 }

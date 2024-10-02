@@ -379,7 +379,27 @@
     },
     {
       "name": "Patchy",
-      "presets": []
+      "presets": [
+        "closebranches",
+        "down",
+        "farbranches",
+        "groundm",
+        "home",
+        "water"
+      ]
+    },
+    {
+      "name": "Toast",
+      "presets": [
+        "down",
+        "downright",
+        "far",
+        "home",
+        "log",
+        "logz",
+        "water",
+        "food"
+      ]
     },
     {
       "name": "Marty",
