@@ -552,12 +552,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Reattach event listeners to preset buttons
         presetButtons.forEach(button => {
-            button.addEventListener('click', () => sendLoadCommand(selectedCamera, button.textContent));
+            button.addEventListener('click', () => sendLoadCommand(selectedCamera, button.textContent.split(' ')[0]));
         });
 
         // Reattach event listeners to custom preset buttons
         customPresetButtons.forEach(button => {
-            button.addEventListener('click', () => sendCustomDialogCommand(selectedCamera, button.textContent));
+            button.addEventListener('click', () => sendCustomDialogCommand(selectedCamera, button.textContent.split(' ')[0]));
         });
 
         // Reattach event listeners to images
