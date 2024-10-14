@@ -2661,8 +2661,7 @@ function sendIRcommand(selected) {
 }
 
 function sendReset() {
-    cam = selectedCamera.toLowerCase();
-    const command = `!resetcam ${cam}`;
+    const command = `!resetcam ${selectedCamera.toLowerCase()}`;
     sendCommand(command);
 }
 
@@ -2709,8 +2708,8 @@ function sendFocusCommand() {
     document.getElementById('focus').value = '';
 }
 
-function sendAutoFocusCommand() {
-    const command = `!ptzautofocus ${selectedCamera.toLowerCase()} on`;
+function sendAutoFocusCommand(value) {
+    const command = `!ptzautofocus ${selectedCamera.toLowerCase()} ${value}`;
     sendCommand(command);
 
 }
@@ -2810,224 +2809,493 @@ document.getElementById('swap2').addEventListener('input', function () {
     document.getElementById('swap-dropdown2').value = 'option1';
 });
 
+// 
+// This next large section is all controller stuff
+// 
+let controllerIndex = null;
 
-// Define thresholds for direction detection
-const THRESHOLD = 0.5; // Adjust this value based on your requirements
-
-// Define speeds for each direction
-const SPEEDS = {
-    'slow': 10,
-    'medium': 30,
-    'fast': 80
-};
-
-// Define zoom speeds
-const ZOOM_SPEEDS = [10, 20, 30]; // Array of different zoom speeds
-let defaultZoomSpeedIndex = 1; // Default zoom speed index (middle)
-let currentZoomSpeedIndex = defaultZoomSpeedIndex; // Current zoom speed index
-
-// Default speed level
-let currentSpeed = 'slow';
-
-// Track last sent command
-let lastCommand = { pan: 0, tilt: 0, zoom: 0 };
-
-// Track bumper states
-let rightBumperPressed = false;
-let leftBumperPressed = false;
-
-// Track trigger states
-let rightTriggerPressed = false;
-let leftTriggerPressed = false;
-
-// Event listener for gamepad connection
-window.addEventListener("gamepadconnected", function (e) {
-    console.log("Gamepad connected:", e.gamepad);
-    requestAnimationFrame(updateGamepadStatus);
+window.addEventListener("gamepadconnected", (event) => {
+  handleConnectDisconnect(event, true);
 });
 
-// Function to update gamepad status
+window.addEventListener("gamepaddisconnected", (event) => {
+  handleConnectDisconnect(event, false);
+});
+
+function handleConnectDisconnect(event, connected) {
+  const gamepad = event.gamepad;
+  console.log(gamepad);
+
+  if (connected) {
+    controllerIndex = gamepad.index;
+    requestAnimationFrame(updateGamepadStatus);
+  } else {
+    controllerIndex = null;
+  }
+}
+
+let a_xPressed = false;
+let x_squarePressed = false;
+let b_circlePressed = false;
+let y_trianglePressed = false;
+
+let leftPressed = false;
+let rightPressed = false;
+let upPressed = false;
+let downPressed = false;
+
+let lastLeftTriggerSpeed = '';
+let lastRightTriggerSpeed = '';
+
+let lBumperPressed = false;
+let rBumperPressed = false;
+
+let leftStickPressed = false;
+let rightStickPressed = false;
+
+var controllerDefaults = {
+    'spamTimeout': 1.5,
+    'stickThresholdSlow': 0.1,
+    'stickThresholdMedium': 0.4,
+    'stickThresholdFast': 0.7,
+    'triggerThresholdSlow': 0.1,
+    'triggerThresholdMedium': 0.4,
+    'triggerThresholdFast': 0.8,
+    'movementSpeedSlow': 10,
+    'movementSpeedMedium': 30,
+    'movementSpeedFast': 80,
+    'zoomSpeedSlow': 10,
+    'zoomSpeedMedium': 20,
+    'zoomSpeedFast': 30,
+    'focusSpeedSlow': 1,
+    'focusSpeedMedium': 2,
+    'focusSpeedFast': 3
+};
+localStorage.setItem('controllerDefaults', JSON.stringify(controllerDefaults));
+
+var controllerSettings = JSON.parse(localStorage.getItem('controllerSettings'));
+if (!controllerSettings) {
+    var controllerSettings = {
+        'spamTimeout': controllerDefaults['spamTimeout'],
+        'stickThresholdSlow': controllerDefaults['stickThresholdSlow'],
+        'stickThresholdMedium': controllerDefaults['stickThresholdMedium'],
+        'stickThresholdFast': controllerDefaults['stickThresholdFast'],
+        'triggerThresholdSlow': controllerDefaults['triggerThresholdSlow'],
+        'triggerThresholdMedium': controllerDefaults['triggerThresholdMedium'],
+        'triggerThresholdFast': controllerDefaults['triggerThresholdFast'],
+        'movementSpeedSlow': controllerDefaults['movementSpeedSlow'],
+        'movementSpeedMedium': controllerDefaults['movementSpeedMedium'],
+        'movementSpeedFast': controllerDefaults['movementSpeedFast'],
+        'zoomSpeedSlow': controllerDefaults['zoomSpeedSlow'],
+        'zoomSpeedMedium': controllerDefaults['zoomSpeedMedium'],
+        'zoomSpeedFast': controllerDefaults['zoomSpeedFast'],
+        'focusSpeedSlow': controllerDefaults['focusSpeedSlow'],
+        'focusSpeedMedium': controllerDefaults['focusSpeedMedium'],
+        'focusSpeedFast': controllerDefaults['focusSpeedFast']
+    };
+    localStorage.setItem('controllerSettings', JSON.stringify(controllerSettings));
+}
+
+const GAMEPAD_UPDATE_TIMEOUT = 100;
+let timeout = 0;
+// This will force a delay between ptzspin commands to prevent shadow bans (hopefully)
+const SPAM_TIMEOUT = (controllerSettings['spamTimeout'] * 1000) / GAMEPAD_UPDATE_TIMEOUT;
+console.log(`Timeout: ${SPAM_TIMEOUT}`);
+
+// Define thresholds for stick speeds
+const STICK_THRESHOLD_SLOW = controllerSettings['stickThresholdSlow'];
+const STICK_THRESHOLD_MEDIUM = controllerSettings['stickThresholdMedium'];
+const STICK_THRESHOLD_FAST = controllerSettings['stickThresholdFast'];
+// Define thresholds for trigger speeds
+const TRIGGER_THRESHOLD_SLOW = controllerSettings['triggerThresholdSlow'];
+const TRIGGER_THRESHOLD_MEDIUM = controllerSettings['triggerThresholdMedium'];
+const TRIGGER_THRESHOLD_FAST = controllerSettings['triggerThresholdFast'];
+
+// Define speeds for pan/tilt
+const SPEEDS = {
+    'slow': controllerSettings['movementSpeedSlow'],
+    'medium': controllerSettings['movementSpeedMedium'],
+    'fast': controllerSettings['movementSpeedFast']
+};
+// Define speeds for zoom
+const ZOOM_SPEEDS = {
+    'slow': controllerSettings['zoomSpeedSlow'],
+    'medium': controllerSettings['zoomSpeedMedium'],
+    'fast': controllerSettings['zoomSpeedFast']
+}
+// Define speeds for focus
+const FOCUS_SPEEDS = {
+    'slow': controllerSettings['focusSpeedSlow'],
+    'medium': controllerSettings['focusSpeedMedium'],
+    'fast': controllerSettings['focusSpeedFast']
+}
+
+let leftTriggerSpeed = null;
+let rightTriggerSpeed = null;
+let leftXSpeed = null;
+let leftYSpeed = null;
+let rightXSpeed = null;
+let rightYSpeed = null;
+
+let lastLeftXDir = '';
+let lastLeftYDir = '';
+let lastLeftXSpeed = '';
+let lastLeftYSpeed = '';
+
+let lastRightXDir = '';
+let lastRightYDir = '';
+let lastRightXSpeed = '';
+let lastRightYSpeed = '';
+
+// Track last sent command
+let lastSpinCommand = { pan: 0, tilt: 0, zoom: 0 };
+let lastFocusCommand = { focus: 0 };
+
 function updateGamepadStatus() {
-    const gamepads = navigator.getGamepads();
-    let isMoving = false;
+    if (controllerIndex !== null) {
+        const gamepad = navigator.getGamepads()[controllerIndex];
 
-    for (let i = 0; i < gamepads.length; i++) {
-        const gamepad = gamepads[i];
-        if (gamepad) {
-            // Get analog stick values
-            const stickX = gamepad.axes[0]; // X axis
-            const stickY = gamepad.axes[1]; // Y axis
+        let pan = 0;
+        let tilt = 0;
+        let zoom = 0;
+        let focus = 0;
 
-            // Get button values
-            const rightTrigger = gamepad.buttons[7].value; // Right trigger (assuming index 7)
-            const leftTrigger = gamepad.buttons[6].value; // Left trigger (assuming index 6)
-            const rightBumper = gamepad.buttons[5].value; // Right bumper (assuming index 5)
-            const leftBumper = gamepad.buttons[4].value; // Left bumper (assuming index 4)
+        function handleTriggers(buttons) {
+            function logTriggerSpeed(triggerSpeed, trigger) {
+                if (trigger == 'Left') {
+                    zoom = -ZOOM_SPEEDS[triggerSpeed];
+                } else if (trigger == 'Right') {
+                    zoom = ZOOM_SPEEDS[triggerSpeed];
+                }
+            }
 
-            let pan = 0;
-            let tilt = 0;
-            let zoom = 0;
+            function shouldLogTriggerMovement(triggerSpeed, trigger) {
+                if (triggerSpeed !== null) {
+                    if (trigger == 'Left') {
+                        return triggerSpeed === lastLeftTriggerSpeed;
+                    } else if (trigger == 'Right') {
+                        return triggerSpeed === lastRightTriggerSpeed;
+                    }
+                }
+            }
 
-            // Determine direction based on stick values
-            if (Math.abs(stickX) > THRESHOLD || Math.abs(stickY) > THRESHOLD) {
-                isMoving = true;
+            function updateLastTriggerMovement(triggerSpeed, trigger) {
+                if (trigger == 'Left') {
+                    lastLeftTriggerSpeed = triggerSpeed;
+                } else if (trigger == 'Right') {
+                    lastRightTriggerSpeed = triggerSpeed;
+                }
+            }
 
-                if (Math.abs(stickX) > THRESHOLD && Math.abs(stickY) > THRESHOLD) {
+            const leftTrigger = buttons[6].value;
+            const rightTrigger = buttons[7].value;
+
+            leftTriggerSpeed = getSpeedLevel(leftTrigger, TRIGGER_THRESHOLD_FAST, TRIGGER_THRESHOLD_MEDIUM, TRIGGER_THRESHOLD_SLOW);
+            rightTriggerSpeed = getSpeedLevel(rightTrigger, TRIGGER_THRESHOLD_FAST, TRIGGER_THRESHOLD_MEDIUM, TRIGGER_THRESHOLD_SLOW);
+
+            if (shouldLogTriggerMovement(leftTriggerSpeed, 'Left')) {
+                logTriggerSpeed(leftTriggerSpeed, 'Left');
+            }
+
+            if (shouldLogTriggerMovement(rightTriggerSpeed, 'Right')) {
+                logTriggerSpeed(rightTriggerSpeed, 'Right');
+            }
+
+            updateLastTriggerMovement(leftTriggerSpeed, 'Left');
+            updateLastTriggerMovement(rightTriggerSpeed, 'Right');
+        }
+
+        function handleButtons(buttons) {
+            const a_x = buttons[0].pressed;
+            const b_circle = buttons[1].pressed;
+            const x_square = buttons[2].pressed;
+            const y_triangle = buttons[3].pressed;
+            const lBumper = buttons[4].pressed;
+            const rBumper = buttons[5].pressed;
+            const leftStick = buttons[10].pressed;
+            const rightStick = buttons[11].pressed;
+            const up = buttons[12].pressed;
+            const down = buttons[13].pressed;
+            const left = buttons[14].pressed;
+            const right = buttons[15].pressed;
+
+            // Handle bottom button
+            if (a_x && !a_xPressed) {
+                sendIRcommand('auto');
+                a_xPressed = true;
+            } else if (!a_x && a_xPressed) {
+                a_xPressed = false;
+            }
+            // Handle right button
+            if (b_circle && !b_circlePressed) {
+                sendIRcommand('on');
+                b_circlePressed = true;
+            } else if (!b_circle && b_circlePressed) {
+                b_circlePressed = false;
+            }
+            // Handle left button
+            if (x_square && !x_squarePressed) {
+                sendIRcommand('off');
+                x_squarePressed = true;
+            } else if (!x_square && x_squarePressed) {
+                x_squarePressed = false;
+            }
+            // Handle top button
+            if (y_triangle && !y_trianglePressed) {
+                sendReset(selectedCamera)
+                y_trianglePressed = true;
+            } else if (!y_triangle && y_trianglePressed) {
+                y_trianglePressed = false;
+            }
+            // Handle left bumper
+            if (lBumper && !lBumperPressed) {
+                sendAutoFocusCommand('off');
+                lBumperPressed = true;
+            } else if (!lBumper && lBumperPressed) {
+                lBumperPressed = false;
+            }
+            // Handle right bumper
+            if (rBumper && !rBumperPressed) {
+                sendAutoFocusCommand('on');
+                rBumperPressed = true;
+            } else if (!rBumper && rBumperPressed) {
+                rBumperPressed = false;
+            }
+            // Handle left stick press (acts as an emergency break of sorts)
+            if (leftStick && !leftStickPressed) {
+                ptzSpin(0, 0, 0);
+                timeout = 0; // Reset spam timer to prevent movement for the specified timeout
+                lastSpinCommand = { pan: 0, tilt: 0, zoom: 0};
+                leftStickPressed = true;
+            } else if (!leftStick && leftStickPressed) {
+                leftStickPressed = false;
+            }
+            // Handle right stick press (acts as an emergency break of sorts)
+            if (rightStick && !rightStickPressed) {
+                ptzCFocus(0);
+                timeout = 0; // Reset spam timer to prevent movement for the specified timeout
+                lastFocusCommand = { focus: 0 };
+                rightStickPressed = true;
+            } else if (!rightStick && rightStickPressed) {
+                rightStickPressed = false;
+            }
+            // Handle up button
+            if (up && !upPressed) {
+                console.log("Up button pressed");
+                upPressed = true;
+            } else if (!up && upPressed) {
+                upPressed = false;
+            }
+            // Handle down button
+            if (down && !downPressed) {
+                console.log("Down button pressed");
+                downPressed = true;
+            } else if (!down && downPressed) {
+                downPressed = false;
+            }
+            // Handle left button
+            if (left && !leftPressed) {
+                console.log("Left button pressed");
+                leftPressed = true;
+            } else if (!left && leftPressed) {
+                leftPressed = false;
+            }
+            // Handle right button
+            if (right && !rightPressed) {
+                console.log("Right button pressed");
+                rightPressed = true;
+            } else if (!right && rightPressed) {
+                rightPressed = false;
+            }
+        }
+
+        // Helper function to determine speed level based on axis/trigger value and given thresholds
+        function getSpeedLevel(value, fastThreshold, mediumThreshold, slowThreshold) {
+            if (Math.abs(value) > fastThreshold) {
+                return 'fast';
+            } else if (Math.abs(value) > mediumThreshold) {
+                return 'medium';
+            } else if (Math.abs(value) > slowThreshold) {
+                return 'slow';
+            }
+            return null;
+        }
+
+        function handleSticks(axes) {
+            if (timeout <= SPAM_TIMEOUT) {
+                timeout += 1;
+            }
+
+            // Helper function to determine the direction a stick is moved
+            function getDirection(x, y) {
+                if (y < 0) return 'Up';
+                if (y > 0) return 'Down';
+                if (x < 0) return 'Left';
+                if (x > 0) return 'Right';
+                return '';
+            }
+            
+            // Update pan/tilt/focus values based on stick direction and speed value
+            function logDirectionAndSpeed(xSpeed, ySpeed, xDir, yDir, stick) {
+                if (xSpeed && ySpeed && xDir && yDir) {
                     // Diagonals
-                    if (stickX < -THRESHOLD && stickY < -THRESHOLD) { // Up-Left
-                        pan = -SPEEDS[currentSpeed];
-                        tilt = SPEEDS[currentSpeed];
-                    } else if (stickX > THRESHOLD && stickY < -THRESHOLD) { // Up-Right
-                        pan = SPEEDS[currentSpeed];
-                        tilt = SPEEDS[currentSpeed];
-                    } else if (stickX < -THRESHOLD && stickY > THRESHOLD) { // Down-Left
-                        pan = -SPEEDS[currentSpeed];
-                        tilt = -SPEEDS[currentSpeed];
-                    } else if (stickX > THRESHOLD && stickY > THRESHOLD) { // Down-Right
-                        pan = SPEEDS[currentSpeed];
-                        tilt = -SPEEDS[currentSpeed];
+                    if (stick == 'Left') {
+                        if (yDir == 'Up' && xDir == 'Left') {
+                            pan = -SPEEDS[xSpeed];
+                            tilt = SPEEDS[ySpeed];
+                        } else if (yDir == 'Up' && xDir == 'Right') {
+                            pan = SPEEDS[xSpeed];
+                            tilt = SPEEDS[ySpeed];
+                        } else if (yDir == 'Down' && xDir == 'Left') {
+                            pan = -SPEEDS[xSpeed];
+                            tilt = -SPEEDS[ySpeed];
+                        } else if (yDir == 'Down' && xDir == 'Right') {
+                            pan = SPEEDS[xSpeed];
+                            tilt = -SPEEDS[ySpeed];
+                        }
+                    } else if (stick == 'Right') {
+                        // Left/Right aren't used on the right stick, only interested in the Y value
+                        if (yDir == 'Up' && xDir == 'Left') {
+                            focus = FOCUS_SPEEDS[ySpeed];
+                        } else if (yDir == 'Up' && xDir == 'Right') {
+                            focus = FOCUS_SPEEDS[ySpeed];
+                        } else if (yDir == 'Down' && xDir == 'Left') {
+                            focus = -FOCUS_SPEEDS[ySpeed];
+                        } else if (yDir == 'Down' && xDir == 'Right') {
+                            focus = -FOCUS_SPEEDS[ySpeed];
+                        }
                     }
-                } else {
-                    // Cardinal directions
-                    if (stickY < -THRESHOLD) { // Up
-                        tilt = SPEEDS[currentSpeed];
-                    } else if (stickY > THRESHOLD) { // Down
-                        tilt = -SPEEDS[currentSpeed];
+                    } else if (xSpeed && xDir) {
+                    // Left/Right
+                    if (stick == 'Left') {
+                        if (xDir == 'Left') {
+                            pan = -SPEEDS[xSpeed];
+                        } else if (xDir == 'Right') {
+                            pan = SPEEDS[xSpeed];
+                        }
+                    } else if (stick == 'Right') {
+                        if (xDir == 'Left') {
+                            // Unused for now
+                        } else if (xDir == 'Right') {
+                            // Unused for now
+                        }
                     }
-
-                    if (stickX < -THRESHOLD) { // Left
-                        pan = -SPEEDS[currentSpeed];
-                    } else if (stickX > THRESHOLD) { // Right
-                        pan = SPEEDS[currentSpeed];
+                    } else if (ySpeed && yDir) {
+                    // Up/Down
+                    if (stick == 'Left') {
+                        if (yDir == 'Up') {
+                            tilt = SPEEDS[ySpeed];
+                        } else if (yDir == 'Down') {
+                            tilt = -SPEEDS[ySpeed];
+                        }
+                    } else if (stick == 'Right') {
+                        if (yDir == 'Up') {
+                            focus = FOCUS_SPEEDS[ySpeed];
+                        } else if (yDir == 'Down') {
+                            focus = -FOCUS_SPEEDS[ySpeed];
+                        }
                     }
                 }
             }
 
-            // Handle zoom based on triggers
-            if (rightTrigger > 0) {
-                if (!rightTriggerPressed) {
-                    zoom = ZOOM_SPEEDS[currentZoomSpeedIndex]; // Zoom in
-                    rightTriggerPressed = true;
-                    ptzSpin(pan, tilt, zoom); // Send command immediately
-                    console.log("Zoom in");
-                }
-
-                // Handle bumper input for adjusting zoom speed while the trigger is held down
-                if (rightBumper > 0) {
-                    if (!rightBumperPressed) {
-                        if (currentZoomSpeedIndex < ZOOM_SPEEDS.length - 1) {
-                            currentZoomSpeedIndex++;
-                            zoom = ZOOM_SPEEDS[currentZoomSpeedIndex]; // Apply new zoom speed
-                            ptzSpin(pan, tilt, zoom); // Send command immediately
-                            console.log(`Zoom speed increased: 0 0 ${zoom}`);
-                        }
-                        rightBumperPressed = true;
+            // Check if the movement and speed match the previous call
+            // Movement direction and speed need to be the same for consecutive function calls to run
+            // This prevents middle states from triggering multiple commands
+            function shouldLogMovement(xSpeed, ySpeed, xDir, yDir, stick) {
+                if (xSpeed != null || ySpeed != null) {
+                    if (stick == 'Left') {
+                        return (
+                            xSpeed === lastLeftXSpeed &&
+                            ySpeed === lastLeftYSpeed &&
+                            xDir === lastLeftXDir &&
+                            yDir === lastLeftYDir
+                        );
+                    } else if (stick == 'Right') {
+                        return (
+                            xSpeed === lastRightXSpeed &&
+                            ySpeed === lastRightYSpeed &&
+                            xDir === lastRightXDir &&
+                            yDir === lastRightYDir
+                        );
                     }
-                } else {
-                    rightBumperPressed = false;
                 }
-
-                if (leftBumper > 0) {
-                    if (!leftBumperPressed) {
-                        if (currentZoomSpeedIndex > 0) {
-                            currentZoomSpeedIndex--;
-                            zoom = ZOOM_SPEEDS[currentZoomSpeedIndex]; // Apply new zoom speed
-                            ptzSpin(pan, tilt, zoom); // Send command immediately
-                            console.log(`Zoom speed decreased: 0 0 ${zoom}`);
-                        }
-                        leftBumperPressed = true;
-                    }
-                } else {
-                    leftBumperPressed = false;
-                }
-            } else {
-                if (rightTriggerPressed) {
-                    zoom = 0; // Stop zooming
-                    rightTriggerPressed = false;
-                    ptzSpin(pan, tilt, zoom); // Send stop command immediately
-                    console.log("Zoom stop");
-
-                    // Reset zoom speed to default
-                    currentZoomSpeedIndex = defaultZoomSpeedIndex;
+            }
+            
+            function updateLastMovement(xSpeed, ySpeed, xDir, yDir, stick) {
+                if (stick == 'Left') {
+                    lastLeftXSpeed = xSpeed;
+                    lastLeftYSpeed = ySpeed;
+                    lastLeftXDir = xDir;
+                    lastLeftYDir = yDir;
+                } else if (stick == 'Right') {
+                    lastRightXSpeed = xSpeed;
+                    lastRightYSpeed = ySpeed;
+                    lastRightXDir = xDir;
+                    lastRightYDir = yDir;
                 }
             }
 
-            if (leftTrigger > 0) {
-                if (!leftTriggerPressed) {
-                    zoom = -ZOOM_SPEEDS[currentZoomSpeedIndex]; // Zoom out
-                    leftTriggerPressed = true;
-                    ptzSpin(pan, tilt, zoom); // Send command immediately
-                    console.log("Zoom out");
-                }
+            const leftStickX = axes[0];
+            const leftStickY = axes[1];
+            
+            leftXSpeed = getSpeedLevel(leftStickX, STICK_THRESHOLD_FAST, STICK_THRESHOLD_MEDIUM, STICK_THRESHOLD_SLOW);
+            leftYSpeed = getSpeedLevel(leftStickY, STICK_THRESHOLD_FAST, STICK_THRESHOLD_MEDIUM, STICK_THRESHOLD_SLOW);
+            const leftXDir = getDirection(leftStickX, 0);
+            const leftYDir = getDirection(0, leftStickY);
 
-                // Handle bumper input for adjusting zoom speed while the trigger is held down
-                if (rightBumper > 0) {
-                    if (!rightBumperPressed) {
-                        if (currentZoomSpeedIndex < ZOOM_SPEEDS.length - 1) {
-                            currentZoomSpeedIndex++;
-                            zoom = -ZOOM_SPEEDS[currentZoomSpeedIndex]; // Apply new zoom speed
-                            ptzSpin(pan, tilt, zoom); // Send command immediately
-                            console.log(`Zoom speed increased: 0 0 ${zoom}`);
-                        }
-                        rightBumperPressed = true;
-                    }
-                } else {
-                    rightBumperPressed = false;
-                }
-
-                if (leftBumper > 0) {
-                    if (!leftBumperPressed) {
-                        if (currentZoomSpeedIndex > 0) {
-                            currentZoomSpeedIndex--;
-                            zoom = -ZOOM_SPEEDS[currentZoomSpeedIndex]; // Apply new zoom speed
-                            ptzSpin(pan, tilt, zoom); // Send command immediately
-                            console.log(`Zoom speed decreased: 0 0 ${zoom}`);
-                        }
-                        leftBumperPressed = true;
-                    }
-                } else {
-                    leftBumperPressed = false;
-                }
-            } else {
-                if (leftTriggerPressed) {
-                    zoom = 0; // Stop zooming
-                    leftTriggerPressed = false;
-                    ptzSpin(pan, tilt, zoom); // Send stop command immediately
-                    console.log("Zoom stop");
-
-                    // Reset zoom speed to default
-                    currentZoomSpeedIndex = defaultZoomSpeedIndex;
-                }
+            if (shouldLogMovement(leftXSpeed, leftYSpeed, leftXDir, leftYDir, 'Left')) {
+                logDirectionAndSpeed(leftXSpeed, leftYSpeed, leftXDir, leftYDir, 'Left');
             }
 
-            // Send movement commands if there is a change
-            if (pan !== lastCommand.pan || tilt !== lastCommand.tilt) {
-                if (pan !== 0 || tilt !== 0) {
-                    // Send the new movement command
-                    ptzSpin(pan, tilt, zoom);
-                    console.log(`Sending command: !ptzspin marmin ${pan} ${tilt} ${zoom}`);
+            // Update the last known movement and speed for the next call
+            updateLastMovement(leftXSpeed, leftYSpeed, leftXDir, leftYDir, 'Left');
+            
+            const rightStickX = axes[2];
+            const rightStickY = axes[3];
 
-                    // Update last command
-                    lastCommand = { pan, tilt, zoom };
-                }
+            rightXSpeed = getSpeedLevel(rightStickX, STICK_THRESHOLD_FAST, STICK_THRESHOLD_MEDIUM, STICK_THRESHOLD_SLOW);
+            rightYSpeed = getSpeedLevel(rightStickY, STICK_THRESHOLD_FAST, STICK_THRESHOLD_MEDIUM, STICK_THRESHOLD_SLOW);
+            const rightXDir = getDirection(rightStickX, 0);
+            const rightYDir = getDirection(0, rightStickY);
+
+            if (shouldLogMovement(rightXSpeed, rightYSpeed, rightXDir, rightYDir, 'Right')) {
+                logDirectionAndSpeed(rightXSpeed, rightYSpeed, rightXDir, rightYDir, 'Right');
+            }
+
+            // Update the last known movement and speed for the next call
+            updateLastMovement(rightXSpeed, rightYSpeed, rightXDir, rightYDir, 'Right');
+        }
+        handleButtons(gamepad.buttons);
+        handleTriggers(gamepad.buttons);
+        handleSticks(gamepad.axes);
+
+        if ((!leftXSpeed && !leftYSpeed) && (!leftTriggerSpeed && !rightTriggerSpeed) && (lastSpinCommand.pan !== 0 || lastSpinCommand.tilt !== 0 || lastSpinCommand.zoom !== 0)) {
+            ptzSpin(0, 0, 0);
+            lastSpinCommand = { pan: 0, tilt: 0, zoom: 0 };
+        }
+
+        if ((!rightXSpeed && !rightYSpeed) && lastFocusCommand.focus !== 0) {
+            ptzCFocus(0);
+            lastFocusCommand = { focus: 0 };
+        }
+
+        if (timeout > SPAM_TIMEOUT && (pan !== lastSpinCommand.pan || tilt !== lastSpinCommand.tilt || zoom !== lastSpinCommand.zoom || focus !== lastFocusCommand.focus)) {
+            if (pan !== 0 || tilt !== 0 || zoom !== 0) {
+                ptzSpin(pan, tilt, zoom);
+                lastSpinCommand = { pan, tilt, zoom };
+                timeout = 0;
+            } else if (focus !== 0) {
+                ptzCFocus(focus);
+                lastFocusCommand = { focus };
+                timeout = 0;
             }
         }
     }
-
-    // Send stop command if not moving and no zoom command is active
-    if (!isMoving && (lastCommand.pan !== 0 || lastCommand.tilt !== 0 || lastCommand.zoom !== 0)) {
-        // Send stop command immediately
-        ptzSpin(0, 0, 0);
-        console.log("Sent stop command: !ptzspin marmin 0 0 0");
-
-        // Reset last command to stop state
-        lastCommand = { pan: 0, tilt: 0, zoom: 0 };
-    }
-
-    // Use a small timeout to prevent overloading the system with rapid updates
-    setTimeout(() => requestAnimationFrame(updateGamepadStatus), 100);
+    setTimeout(() => requestAnimationFrame(updateGamepadStatus), GAMEPAD_UPDATE_TIMEOUT);
 }
-
+// 
+// Woo end of controller stuff
+// 
 
 // Arrow key ptzspin
 let panSpeed = 0;

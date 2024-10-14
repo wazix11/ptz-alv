@@ -242,7 +242,7 @@ body {
 }
 
 .settings-table th {
-    background-color: #f2f2f2;
+    background-color: #5A5A5A;
 }
 
 .settings-form {
@@ -267,7 +267,6 @@ body {
     text-decoration: none;
     display: inline-block;
     font-size: 14px;
-    margin-top: 10px;
     cursor: pointer;
     border-radius: 5px;
 }

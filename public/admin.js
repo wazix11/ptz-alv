@@ -262,7 +262,6 @@ document.getElementById('interfaceSettingsLink').addEventListener('click', funct
             toggleDirectionContainer(isChecked);
         }
         document.getElementById('interfaceSettingsLink').click();
-        console.log('test');
     });
 
     setupCheckbox('MPVCheckbox', 'MPVCheckboxState', (isChecked) => {
@@ -312,6 +311,208 @@ document.getElementById('interfaceSettingsLink').addEventListener('click', funct
     });
 
 });
+
+var controllerDefaults = JSON.parse(localStorage.getItem('controllerDefaults'));
+var controllerSettings = JSON.parse(localStorage.getItem('controllerSettings'));
+
+if (!controllerSettings) {
+    var controllerSettings = {
+        'spamTimeout': controllerDefaults['spamTimeout'],
+        'stickThresholdSlow': controllerDefaults['stickThresholdSlow'],
+        'stickThresholdMedium': controllerDefaults['stickThresholdMedium'],
+        'stickThresholdFast': controllerDefaults['stickThresholdFast'],
+        'triggerThresholdSlow': controllerDefaults['triggerThresholdSlow'],
+        'triggerThresholdMedium': controllerDefaults['triggerThresholdMedium'],
+        'triggerThresholdFast': controllerDefaults['triggerThresholdFast'],
+        'movementSpeedSlow': controllerDefaults['movementSpeedSlow'],
+        'movementSpeedMedium': controllerDefaults['movementSpeedMedium'],
+        'movementSpeedFast': controllerDefaults['movementSpeedFast'],
+        'zoomSpeedSlow': controllerDefaults['zoomSpeedSlow'],
+        'zoomSpeedMedium': controllerDefaults['zoomSpeedMedium'],
+        'zoomSpeedFast': controllerDefaults['zoomSpeedFast'],
+        'focusSpeedSlow': controllerDefaults['focusSpeedSlow'],
+        'focusSpeedMedium': controllerDefaults['focusSpeedMedium'],
+        'focusSpeedFast': controllerDefaults['focusSpeedFast']
+    };
+    localStorage.setItem('controllerSettings', JSON.stringify(controllerSettings));
+}
+
+function editControllerField(fieldId) {
+    const fieldValue = document.getElementById(fieldId);
+    const currentValue = fieldValue.innerText.trim();
+
+    // Show a prompt dialog for editing the field
+    let newValue = prompt(`Enter new value for ${fieldId}:`, currentValue);
+
+    // Ensure the fieldValue is updated with the correct newValue
+    if (newValue && !isNaN(newValue)) {
+        fieldValue.innerText = newValue;
+        // Update the localStorage with the new value
+        controllerSettings[fieldId] = newValue;
+        localStorage.setItem('controllerSettings', JSON.stringify(controllerSettings));
+    } else {
+        fieldValue.innerText = controllerDefaults[fieldId];
+        // Reset the localStorage to use the default value
+        controllerSettings[fieldId] = controllerDefaults[fieldId];
+        localStorage.setItem('controllerSettings', JSON.stringify(controllerSettings));
+    }
+}
+
+function showControllerSettings() {
+    const activeMenuItem = document.querySelector('.menu-item.active');
+    if (activeMenuItem) {
+        activeMenuItem.classList.remove('active');
+    }
+
+    // Add 'active' class to Controller Settings menu item
+    document.getElementById('controllerSettingsLink').classList.add('active');
+
+    // Create the Controller Settings form HTML
+    const controllerSettingsForm = document.createElement('div');
+    controllerSettingsForm.id = 'controllerSettingsForm';
+    controllerSettingsForm.classList.add('settings-form');
+    controllerSettingsForm.style.display = 'block';
+
+    // This is such an annoying way to do this
+    controllerSettingsForm.innerHTML = `
+        <h2>Controller Settings</h2>
+        <table class="settings-table">
+            <thead>
+                <tr>
+                    <th>Variable</th>
+                    <th>Value</th>
+                    <th>Default</th>
+                    <th>Actions</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><label class="field-label">Spam Timeout</label></td>
+                    <td><p id="spamTimeout" class="field-value">${controllerSettings['spamTimeout']}</p></td>
+                    <td><p id="defaultSpamTimeout" class="field-value">${controllerDefaults['spamTimeout']}</p></td>
+                    <td><button class="edit-button" onclick="editControllerField('spamTimeout')">Edit</button></td>
+                    <td><p>Time in seconds between commands to prevent spam bans</p></td>
+                </tr>
+                <tr><td colspan="100%" style="border-right: hidden; border-left: hidden;"></td></tr>
+                <tr>
+                    <td><label class="field-label">Stick Threshold Slow</label></td>
+                    <td><p id="stickThresholdSlow" class="field-value">${controllerSettings['stickThresholdSlow']}</p></td>
+                    <td><p id="defaultStickThresholdSlow" class="field-value">${controllerDefaults['stickThresholdSlow']}</p></td>
+                    <td><button class="edit-button" onclick="editControllerField('stickThresholdSlow')">Edit</button></td>
+                    <td><p>[0-1] Joystick threshold to toggle the slow speed value</p></td>
+                </tr>
+                <tr>
+                    <td><label class="field-label">Stick Threshold Medium</label></td>
+                    <td><p id="stickThresholdMedium" class="field-value">${controllerSettings['stickThresholdMedium']}</p></td>
+                    <td><p id="defaultStickThresholdMedium" class="field-value">${controllerDefaults['stickThresholdMedium']}</p></td>
+                    <td><button class="edit-button" onclick="editControllerField('stickThresholdMedium')">Edit</button></td>
+                    <td><p>[0-1] Joystick threshold to toggle the medium speed value</p></td>
+                </tr>
+                <tr>
+                    <td><label class="field-label">Stick Threshold Fast</label></td>
+                    <td><p id="stickThresholdFast" class="field-value">${controllerSettings['stickThresholdFast']}</p></td>
+                    <td><p id="defaultStickThresholdFast" class="field-value">${controllerDefaults['stickThresholdFast']}</p></td>
+                    <td><button class="edit-button" onclick="editControllerField('stickThresholdFast')">Edit</button></td>
+                    <td><p>[0-1] Joystick threshold to toggle the fast speed value</p></td>
+                </tr>
+                <tr><td colspan="100%" style="border-right: hidden; border-left: hidden;"></td></tr>
+                <tr>
+                    <td><label class="field-label">Trigger Threshold Slow</label></td>
+                    <td><p id="triggerThresholdSlow" class="field-value">${controllerSettings['triggerThresholdSlow']}</p></td>
+                    <td><p id="defaultTriggerThresholdSlow" class="field-value">${controllerDefaults['triggerThresholdSlow']}</p></td>
+                    <td><button class="edit-button" onclick="editControllerField('triggerThresholdSlow')">Edit</button></td>
+                    <td><p>[0-1] Trigger threshold to toggle the slow speed value</p></td>
+                </tr>
+                <tr>
+                    <td><label class="field-label">Trigger Threshold Medium</label></td>
+                    <td><p id="triggerThresholdMedium" class="field-value">${controllerSettings['triggerThresholdMedium']}</p></td>
+                    <td><p id="defaultTriggerThresholdMedium" class="field-value">${controllerDefaults['triggerThresholdMedium']}</p></td>
+                    <td><button class="edit-button" onclick="editControllerField('triggerThresholdMedium')">Edit</button></td>
+                    <td><p>[0-1] Trigger threshold to toggle the medium speed value</p></td>
+                </tr>
+                <tr>
+                    <td><label class="field-label">Trigger Threshold Fast</label></td>
+                    <td><p id="triggerThresholdFast" class="field-value">${controllerSettings['triggerThresholdFast']}</p></td>
+                    <td><p id="defaultTriggerThresholdFast" class="field-value">${controllerDefaults['triggerThresholdFast']}</p></td>
+                    <td><button class="edit-button" onclick="editControllerField('triggerThresholdFast')">Edit</button></td>
+                    <td><p>[0-1] Trigger threshold to toggle the fast speed value</p></td>
+                </tr>
+                <tr><td colspan="100%" style="border-right: hidden; border-left: hidden;"></td></tr>
+                <tr>
+                    <td><label class="field-label">Movement Speed Slow</label></td>
+                    <td><p id="movementSpeedSlow" class="field-value">${controllerSettings['movementSpeedSlow']}</p></td>
+                    <td><p id="defaultMovementSpeedSlow" class="field-value">${controllerDefaults['movementSpeedSlow']}</p></td>
+                    <td><button class="edit-button" onclick="editControllerField('movementSpeedSlow')">Edit</button></td>
+                    <td><p>[1-100] Slow speed for pan/tilt</p></td>
+                </tr>
+                <tr>
+                    <td><label class="field-label">Movement Speed Medium</label></td>
+                    <td><p id="movementSpeedMedium" class="field-value">${controllerSettings['movementSpeedMedium']}</p></td>
+                    <td><p id="defaultMovementSpeedMedium" class="field-value">${controllerDefaults['movementSpeedMedium']}</p></td>
+                    <td><button class="edit-button" onclick="editControllerField('movementSpeedMedium')">Edit</button></td>
+                    <td><p>[1-100] Medium speed for pan/tilt</p></td>
+                </tr>
+                <tr>
+                    <td><label class="field-label">Movement Speed Fast</label></td>
+                    <td><p id="movementSpeedFast" class="field-value">${controllerSettings['movementSpeedFast']}</p></td>
+                    <td><p id="defaultMovementSpeedFast" class="field-value">${controllerDefaults['movementSpeedFast']}</p></td>
+                    <td><button class="edit-button" onclick="editControllerField('movementSpeedFast')">Edit</button></td>
+                    <td><p>[1-100] Fast speed for pan/tilt</p></td>
+                </tr>
+                <tr><td colspan="100%" style="border-right: hidden; border-left: hidden;"></td></tr>
+                <tr>
+                    <td><label class="field-label">Zoom Speed Slow</label></td>
+                    <td><p id="zoomSpeedSlow" class="field-value">${controllerSettings['zoomSpeedSlow']}</p></td>
+                    <td><p id="defaultZoomSpeedSlow" class="field-value">${controllerDefaults['zoomSpeedSlow']}</p></td>
+                    <td><button class="edit-button" onclick="editControllerField('zoomSpeedSlow')">Edit</button></td>
+                    <td><p>[1-100] Slow speed for zoom</p></td>
+                </tr>
+                <tr>
+                    <td><label class="field-label">Zoom Speed Medium</label></td>
+                    <td><p id="zoomSpeedMedium" class="field-value">${controllerSettings['zoomSpeedMedium']}</p></td>
+                    <td><p id="defaultZoomSpeedMedium" class="field-value">${controllerDefaults['zoomSpeedMedium']}</p></td>
+                    <td><button class="edit-button" onclick="editControllerField('zoomSpeedMedium')">Edit</button></td>
+                    <td><p>[1-100] Medium speed for zoom</p></td>
+                </tr>
+                <tr>
+                    <td><label class="field-label">Zoom Speed Fast</label></td>
+                    <td><p id="zoomSpeedFast" class="field-value">${controllerSettings['zoomSpeedFast']}</p></td>
+                    <td><p id="defaultZoomSpeedFast" class="field-value">${controllerDefaults['zoomSpeedFast']}</p></td>
+                    <td><button class="edit-button" onclick="editControllerField('zoomSpeedFast')">Edit</button></td>
+                    <td><p>[1-100] Fast speed for zoom</p></td>
+                </tr>
+                <tr><td colspan="100%" style="border-right: hidden; border-left: hidden;"></td></tr>
+                <tr>
+                    <td><label class="field-label">Focus Speed Slow</label></td>
+                    <td><p id="focusSpeedSlow" class="field-value">${controllerSettings['focusSpeedSlow']}</p></td>
+                    <td><p id="defaultFocusSpeedSlow" class="field-value">${controllerDefaults['focusSpeedSlow']}</p></td>
+                    <td><button class="edit-button" onclick="editControllerField('focusSpeedSlow')">Edit</button></td>
+                    <td><p>[1-100] Slow speed for focus</p></td>
+                </tr>
+                <tr>
+                    <td><label class="field-label">Focus Speed Medium</label></td>
+                    <td><p id="focusSpeedMedium" class="field-value">${controllerSettings['focusSpeedMedium']}</p></td>
+                    <td><p id="defaultFocusSpeedMedium" class="field-value">${controllerDefaults['focusSpeedMedium']}</p></td>
+                    <td><button class="edit-button" onclick="editControllerField('focusSpeedMedium')">Edit</button></td>
+                    <td><p>[1-100] Medium speed for focus</p></td>
+                </tr>
+                <tr>
+                    <td><label class="field-label">Focus Speed Fast</label></td>
+                    <td><p id="focusSpeedFast" class="field-value">${controllerSettings['focusSpeedFast']}</p></td>
+                    <td><p id="defaultFocusSpeedFast" class="field-value">${controllerDefaults['focusSpeedFast']}</p></td>
+                    <td><button class="edit-button" onclick="editControllerField('focusSpeedFast')">Edit</button></td>
+                    <td><p>[1-100] Fast speed for focus</p></td>
+                </tr>
+            </tbody>
+        </table>
+    `;
+
+    // Append the Controller Settings form to the mainContent container
+    const mainContentContainer = document.getElementById('mainContent');
+    mainContentContainer.innerHTML = '';
+    mainContentContainer.appendChild(controllerSettingsForm);
+}
 
 function populateCurrentCameras() {
     const currentCameraList = document.getElementById('currentCameraList');
