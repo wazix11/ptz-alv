@@ -375,7 +375,8 @@ function showControllerSettings() {
 
     // This is such an annoying way to do this
     controllerSettingsForm.innerHTML = `
-        <h2>Controller Settings</h2>
+        <img src="/img/gamepad_controls.png" alt="Gamepad Controls">
+	<h2>Controller Settings</h2>
         <table class="settings-table">
             <thead>
                 <tr>
