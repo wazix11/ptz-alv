@@ -468,18 +468,6 @@
       ]
     },
     {
-      "name": "RatT",
-      "presets": []
-    },
-    {
-      "name": "RatM",
-      "presets": []
-    },
-    {
-      "name": "RatB",
-      "presets": []
-    },
-    {
       "name": "WolfDen",
       "presets": [
         "home",
@@ -516,22 +504,6 @@
     },
     {
       "name": "FoxFoxCorner",
-      "presets": []
-    },
-    {
-      "name": "CrowOutCrowIn",
-      "presets": []
-    },
-    {
-      "name": "CrowInCrowOut",
-      "presets": []
-    },
-    {
-      "name": "HankMulti",
-      "presets": []
-    },
-    {
-      "name": "RatMulti",
       "presets": []
     }
   ]
