@@ -375,8 +375,7 @@ function showControllerSettings() {
 
     // This is such an annoying way to do this
     controllerSettingsForm.innerHTML = `
-        <img src="/img/gamepad_controls.png" alt="Gamepad Controls">
-	<h2>Controller Settings</h2>
+        <h2>Controller Settings</h2>
         <table class="settings-table">
             <thead>
                 <tr>
@@ -625,9 +624,11 @@ function deleteCamera(cameraName) {
                     throw new Error('Failed to delete camera');
                 }
                 console.log('Camera deleted successfully');
-                // Optionally, redirect to a different page or perform any other action
-                populateCurrentCameras(); // Refresh the list of current cameras
-                document.getElementById('manageCamerasLink').click();
+                // Wait for DOM update before clicking
+                setTimeout(() => {
+                    const link = document.getElementById('manageCamerasLink');
+                    if (link) link.click();
+                }, 0);
             })
             .catch(error => {
                 console.error('Error deleting camera:', error);
@@ -1240,8 +1241,11 @@ function displaySyncPresets(cameraName, fetchedPresets) {
             // Extract existing presets from the server data
             const existingPresets = selectedCamera.presets;
 
+            const removedPresets = existingPresets.filter(preset => !fetchedPresets.includes(preset.trim()));
+            console.log('Removed presets:', removedPresets);
+
             // Compare existing presets with the new presets fetched from Twitch chat
-            const newPresets = compareSyncPresets(existingPresets, fetchedPresets);
+            const newPresets = fetchedPresets.filter(preset => !existingPresets.includes(preset.trim()));
 
             // Hide the current table
             const currentTable = document.getElementById('presetTable');
@@ -1359,11 +1363,6 @@ function createSyncPresetRow(index, preset) {
     `;
     return row;
 }
-
-function compareSyncPresets(existingPresets, newPresets) {
-    return newPresets.filter(preset => !existingPresets.includes(preset.trim()));
-}
-
 
 let isNewPreset = true; // Initially set isNewPreset to true for creating a new preset
 

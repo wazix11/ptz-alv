@@ -38,7 +38,16 @@
     "bigrocks": "br",
     "belowplatform": "bp",
     "backleftcorner": "blc",
-    "den2rw": "d2rw"
+    "den2rw": "d2rw",
+    "log": "lo",
+    "neargrass": "ng",
+    "shaft": "s",
+    "switchden": "sd",
+    "switchpen": "sp",
+    "switchpenl": "spl",
+    "switchpenr": "spr",
+    "switchramp": "sr",
+    "tipmo": "tm"
   },
   "WolfCorner": {
     "backfence": "bf",
@@ -78,10 +87,13 @@
     "rightfence": "rf",
     "river": "rvr",
     "water": "w",
-    "wolfcam": "wc"
+    "wolfcam": "wc",
+    "grassl": "gl",
+    "leftcornerw": "lcw",
+    "switchpen": "sp"
   },
   "WolfIndoor": {
-    "doors": "d",
+    "doors": "do",
     "home": "h",
     "humanleft": "hl",
     "humanright": "hr",
@@ -89,7 +101,13 @@
     "platformleft": "pl",
     "platformright": "pr",
     "left": "l",
-    "right": "r"
+    "right": "r",
+    "center": "c",
+    "down": "d",
+    "downright": "dr",
+    "neardoor": "nd",
+    "platformleftb": "plb",
+    "platformrightb": "prb"
   },
   "Pasture": {
     "angel": "a",
@@ -122,7 +140,13 @@
     "sky": "s",
     "stompyfood": "sf",
     "sunrise": "su",
-    "water": "w"
+    "water": "w",
+    "down": "d",
+    "feederstatus": "fst",
+    "grove2": "g2",
+    "pedrocorner": "pc",
+    "poolw": "pow",
+    "pole": "pole"
   },
   "Parrots": {
     "abovedoor": "ad",
@@ -148,7 +172,8 @@
     "macawsw": "mw",
     "platform1": "p1",
     "platform2": "p2",
-    "tablet": "t"
+    "tablet": "t",
+    "littlesbowl3": "lbo3"
   },
   "Fox": {
     "belowplatform": "bp",
@@ -197,7 +222,8 @@
     "hillwide": "hw",
     "hillright": "hr",
     "hillleft": "hl",
-    "den": "d"
+    "den": "d",
+    "bowl": "b"
   },
   "CrowIn": {
     "back": "b",
@@ -246,7 +272,7 @@
   },
   "MarmIn": {
     "bowll": "bl",
-    "bridgecl": "",
+    "bridgecl": "bcl",
     "bridgel": "brl",
     "bridgem": "brm",
     "bridger": "brr",
@@ -255,7 +281,7 @@
     "domeleft": "dl",
     "domeright": "dr",
     "down": "d",
-    "flapl": "",
+    "flapl": "fll",
     "flaps": "f",
     "floor": "fl",
     "home": "h",
@@ -270,7 +296,8 @@
     "win4": "w4",
     "windows": "w",
     "winl": "wl",
-    "winr": "wr"
+    "winr": "wr",
+    "leftw": "lw"
   },
   "MarmOut": {
     "domel": "dol",
@@ -305,7 +332,8 @@
     "rightpostb": "rpb",
     "post2t": "p2t",
     "bottomshelfl": "bsl",
-    "bottomshelfr": "bsr"
+    "bottomshelfr": "bsr",
+    "rightpost": "rpo"
   },
   "Georgie": {
     "closedirt": "cd",
@@ -346,6 +374,82 @@
     "farbranches": "fb",
     "groundm": "gm",
     "home": "h",
+    "water": "w"
+  },
+  "Pushpop": {
+    "backleft": "bl",
+    "backright": "br",
+    "behind": "b",
+    "food": "f",
+    "home": "h",
+    "left": "l",
+    "right": "r",
+    "crunchwide": "cw",
+    "cubby": "cu"
+  },
+  "WolfDen2": {
+    "home": "h",
+    "bottomright": "br",
+    "left": "l",
+    "leftcorner": "lc",
+    "rightcorner": "rc"
+  },
+  "Hank": {
+    "home": "h",
+    "water": "w"
+  },
+  "Roaches": {
+    "down": "d",
+    "food": "f",
+    "home": "h",
+    "left": "l",
+    "top": "t",
+    "downr": "dr",
+    "right": "r",
+    "stickl": "sl",
+    "sticklt": "slt",
+    "stickr": "sr",
+    "stickrt": "srt"
+  },
+  "PushpopCrunch": {
+    "home": "h"
+  },
+  "PushpopIndoor": {
+    "digbox": "db",
+    "down": "d",
+    "downl": "dl",
+    "downr": "dr",
+    "home": "h",
+    "leftcorner": "lc",
+    "rightcorner": "rc"
+  },
+  "ChickenIndoor": {
+    "home": "h"
+  },
+  "Chicken": {
+    "backright": "br",
+    "down": "d",
+    "downright": "dr",
+    "home": "h",
+    "left": "l",
+    "right": "r",
+    "window": "w"
+  },
+  "GeorgieWater": {
+    "home": "h"
+  },
+  "WolfSwitch": {
+    "back": "b",
+    "den": "d",
+    "dentop": "dt",
+    "down": "do",
+    "downleft": "dl",
+    "downright": "dr",
+    "farleft": "fl",
+    "farright": "fr",
+    "home": "h",
+    "insidedoor": "id",
+    "pond": "p",
     "water": "w"
   }
 }

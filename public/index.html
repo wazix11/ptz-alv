@@ -41,6 +41,51 @@
                     <div class="camera-container" id="cameraContainer"></div>
                 </div>
 
+                <!-- Swap buttons -->
+                <div class="direction-container">
+                    <h2 class="direction-heading" style="cursor: pointer;"
+                        onclick="toggleDirectionPad('.swap-container')">- Swap -</h2>
+                    <div class="swap-container">
+                        <div class="swap-buttons">
+                            <button class="swap-num-button" onclick="setSwapNumber(2)">2</button>
+                            <button class="swap-num-button" onclick="setSwapNumber(3)">3</button>
+                            <button class="swap-num-button" onclick="setSwapNumber(4)">4</button>
+                            <button class="swap-num-button" onclick="setSwapNumber(5)">5</button>
+                            <button class="swap-num-button" onclick="setSwapNumber(6)">6</button>
+                        </div>
+                        <div class="swap-preset-buttons">
+                            <button class="swap-preset-button" onclick="setPresetSwap('fox')">fox</button>
+                            <button class="swap-preset-button" onclick="setPresetSwap('crow')">crow</button>
+                            <button class="swap-preset-button" onclick="setPresetSwap('marm')">marm</button>
+                            <button class="swap-preset-button" onclick="setPresetSwap('wolf')">wolf</button>
+                            <button class="swap-preset-button" onclick="setPresetSwap('wolfin')">wolfin</button>
+                            <button class="swap-preset-button" onclick="setPresetSwap('wden')">wden</button>
+                            <button class="swap-preset-button" onclick="setPresetSwap('chkn')">chkn</button>
+                            <button class="swap-preset-button" onclick="setPresetSwap('gorg')">gorg</button>
+                            <button class="swap-preset-button" onclick="setPresetSwap('push')">push</button>
+                        </div>
+                        <div class="dropdown-container">
+                            <div class="swap-dropdown1">
+                                <select id="swap-dropdown1">
+                                    <option value="option1">-Select-</option>
+                                </select>
+                            </div>
+                            <div class="swap-dropdown2">
+                                <select id="swap-dropdown2">
+                                    <option value="option1">-Select-</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="swap-wrapper">
+                            <input type="text" id="swap1" class="swap-input" placeholder="Swap 1">
+                            <input type="text" id="swap2" class="swap-input" placeholder="Swap 2">
+                        </div>
+                        <button class="swap-button" onclick="sendSwapCommand()"
+                            onmousedown="animateButton(this)">Swap</button>
+                    </div>
+                </div>
+
                 <!-- Direction buttons -->
                 <div class="direction-container" id="directionpadContainer" style="display: none;">
                     <h2 class="direction-heading" style="cursor: pointer;"
@@ -103,8 +148,8 @@
                                 <button class="arrow-button"></button>
                                 <button class="ptz-arrow-button" onclick="decrementZoom()"
                                     onmousedown="animateButton(this)">◀</button>
-                                    <button class="ptz-arrow-button" id="sliderZoomLabel" style="font-size: 17px;">10%</button>
-                                    <button class="ptz-arrow-button" onclick="incrementZoom()"
+                                <button class="ptz-arrow-button" id="sliderZoomLabel" style="font-size: 17px;">10%</button>
+                                <button class="ptz-arrow-button" onclick="incrementZoom()"
                                     onmousedown="animateButton(this)">▶</button>
                                 <button class="arrow-button"></button>
                                 <button class="ptz-arrow-button" onclick="sendpadZoom('minus')"
@@ -121,14 +166,6 @@
                     <h2 class="direction-heading" style="cursor: pointer;"
                         onclick="toggleDirectionPad('.zoom-menu-outer')">- Zoom -</h2>
                     <div class="zoom-menu-outer">
-                        <div class="zoom-heading-container">
-                            <!-- <h2 class="zoomr-heading" id="zoomrHeading" style="cursor: pointer;"
-                                onclick="toggleZoomMenu('.zoomr-menu'); setActiveHeading('.zoomr-heading');">Zoom %
-                            </h2>
-                            <h2 class="zoom-heading" id="zoomHeading" style="cursor: pointer;"
-                                onclick="toggleZoomMenu('.zoom-menu'); setActiveHeading('.zoom-heading');">Zoom +/-
-                            </h2> -->
-                        </div>
                         <div class="zoom-menu-inner">
                             <div class="zoomr-menu">
                                 <div class="zoom-dropdown-wrapper">
@@ -165,48 +202,6 @@
                         </div>
                         <button class="send-button" onclick="sendPanTiltZoom()"
                             onmousedown="animateButton(this)">Send</button>
-                    </div>
-                </div>
-
-                <!-- Swap buttons -->
-                <div class="direction-container">
-                    <h2 class="direction-heading" style="cursor: pointer;"
-                        onclick="toggleDirectionPad('.swap-container')">- Swap -</h2>
-                    <div class="swap-container">
-                        <div class="swap-buttons">
-                            <button class="swap-num-button" onclick="setSwapNumber(2)">2</button>
-                            <button class="swap-num-button" onclick="setSwapNumber(3)">3</button>
-                            <button class="swap-num-button" onclick="setSwapNumber(4)">4</button>
-                            <button class="swap-num-button" onclick="setSwapNumber(5)">5</button>
-                            <button class="swap-num-button" onclick="setSwapNumber(6)">6</button>
-                        </div>
-                        <div class="swap-preset-buttons">
-                            <button class="swap-preset-button" onclick="setPresetSwap('fox')">fox</button>
-                            <button class="swap-preset-button" onclick="setPresetSwap('crow')">crow</button>
-                            <button class="swap-preset-button" onclick="setPresetSwap('marm')">marm</button>
-                            <button class="swap-preset-button" onclick="setPresetSwap('wolf')">wolf</button>
-                            <button class="swap-preset-button" onclick="setPresetSwap('wolfin')">wolfin</button>
-                            <button class="swap-preset-button" onclick="setPresetSwap('wden')">wden</button>
-                        </div>
-                        <div class="dropdown-container">
-                            <div class="swap-dropdown1">
-                                <select id="swap-dropdown1">
-                                    <option value="option1">-Select-</option>
-                                </select>
-                            </div>
-                            <div class="swap-dropdown2">
-                                <select id="swap-dropdown2">
-                                    <option value="option1">-Select-</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="swap-wrapper">
-                            <input type="text" id="swap1" class="swap-input" placeholder="Swap 1">
-                            <input type="text" id="swap2" class="swap-input" placeholder="Swap 2">
-                        </div>
-                        <button class="swap-button" onclick="sendSwapCommand()"
-                            onmousedown="animateButton(this)">Swap</button>
                     </div>
                 </div>
 

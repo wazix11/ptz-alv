@@ -2759,6 +2759,12 @@ function setPresetSwap(selected) {
         sendCommand('!swap wolf wolfden');
     } else if (selected === 'fox') {
         sendCommand('!swap fox foxcorner');
+    } else if (selected === 'chkn') {
+        sendCommand('!swap chicken chickenindoor');
+    } else if (selected === 'gorg') {
+        sendCommand('!swap georgie georgiewater');
+    } else if (selected == 'push') {
+        sendCommand('!swap pushpop pushpopindoor');
     }
 }
 

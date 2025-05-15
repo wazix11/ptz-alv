@@ -1,6 +1,123 @@
 {
   "cameras": [
     {
+      "name": "Pasture",
+      "presets": [
+        "angel",
+        "barn",
+        "barn2",
+        "barn2hay",
+        "barn2r",
+        "barnfloor",
+        "brush",
+        "brushr",
+        "donksleep",
+        "feeder",
+        "feedstall",
+        "fencel",
+        "gate",
+        "grove",
+        "home",
+        "insidebarn",
+        "middle",
+        "pen",
+        "penl",
+        "penr",
+        "pole",
+        "pool",
+        "pooll",
+        "poolr",
+        "purplebase",
+        "purplenest",
+        "right",
+        "roundpen",
+        "saltlick",
+        "sky",
+        "stompyfood",
+        "sunrise",
+        "water",
+        "down",
+        "feederstatus",
+        "grove2",
+        "pedrocorner",
+        "poolw"
+      ]
+    },
+    {
+      "name": "Parrots",
+      "presets": [
+        "abovedoor",
+        "bothwindows",
+        "chicken",
+        "door",
+        "floor",
+        "floorl",
+        "floorr",
+        "home",
+        "littles",
+        "littles2",
+        "littlesb",
+        "littlesbowl",
+        "littlesbowl2",
+        "littlessleep",
+        "littlest",
+        "littlesw",
+        "macaws",
+        "macawsb",
+        "macawsbowl",
+        "macawsbowl2",
+        "macawst",
+        "macawsw",
+        "platform1",
+        "platform2",
+        "tablet",
+        "littlesbowl3"
+      ]
+    },
+    {
+      "name": "Fox",
+      "presets": [
+        "belowplatform",
+        "belowplatformz",
+        "belowramp",
+        "bench",
+        "brush",
+        "center",
+        "den",
+        "denf",
+        "denl",
+        "denr",
+        "down",
+        "downleft",
+        "downright",
+        "entry",
+        "home",
+        "insidedoor",
+        "left",
+        "leftfence",
+        "lefttraining",
+        "platform",
+        "platformbl",
+        "platformbr",
+        "platformfl",
+        "platformfr",
+        "platforml",
+        "rampl",
+        "rampt",
+        "right",
+        "rightcorner",
+        "righttraining",
+        "shade",
+        "table",
+        "treeclimb",
+        "treehouse",
+        "treehousel",
+        "treehouser",
+        "bed",
+        "behindtree"
+      ]
+    },
+    {
       "name": "Wolf",
       "presets": [
         "backleftcorner",
@@ -40,7 +157,16 @@
         "tipz",
         "waterfall",
         "wolfcornercam",
-        "den2rw"
+        "den2rw",
+        "log",
+        "neargrass",
+        "shaft",
+        "switchden",
+        "switchpen",
+        "switchpenl",
+        "switchpenr",
+        "switchramp",
+        "tipmo"
       ]
     },
     {
@@ -83,144 +209,27 @@
         "rightfence",
         "river",
         "water",
-        "wolfcam"
+        "wolfcam",
+        "grassl",
+        "leftcornerw",
+        "switchpen"
       ]
     },
     {
-      "name": "WolfIndoor",
+      "name": "WolfSwitch",
       "presets": [
-        "doors",
-        "home",
-        "left",
-        "right",
-        "platformcenter",
-        "platformleft",
-        "platformright"
-      ]
-    },
-    {
-      "name": "Pasture",
-      "presets": [
-        "angel",
-        "barn",
-        "barn2",
-        "barn2hay",
-        "barn2r",
-        "barnfloor",
-        "brush",
-        "brushr",
-        "donksleep",
-        "feeder",
-        "feedstall",
-        "fencel",
-        "gate",
-        "grove",
-        "home",
-        "insidebarn",
-        "middle",
-        "pen",
-        "penl",
-        "penr",
-        "pole",
-        "pool",
-        "pooll",
-        "poolr",
-        "purplebase",
-        "purplenest",
-        "right",
-        "roundpen",
-        "saltlick",
-        "sky",
-        "stompyfood",
-        "sunrise",
-        "water"
-      ]
-    },
-    {
-      "name": "Parrots",
-      "presets": [
-        "abovedoor",
-        "bothwindows",
-        "chicken",
-        "door",
-        "floor",
-        "floorl",
-        "floorr",
-        "home",
-        "littles",
-        "littles2",
-        "littlesb",
-        "littlesbowl",
-        "littlesbowl2",
-        "littlessleep",
-        "littlest",
-        "littlesw",
-        "macaws",
-        "macawsb",
-        "macawsbowl",
-        "macawsbowl2",
-        "macawst",
-        "macawsw",
-        "platform1",
-        "platform2",
-        "tablet"
-      ]
-    },
-    {
-      "name": "Fox",
-      "presets": [
-        "belowplatform",
-        "belowplatformz",
-        "belowramp",
-        "bench",
-        "brush",
-        "center",
+        "back",
         "den",
-        "denf",
-        "denl",
-        "denr",
+        "dentop",
         "down",
         "downleft",
         "downright",
-        "entry",
+        "farleft",
+        "farright",
         "home",
         "insidedoor",
-        "left",
-        "leftfence",
-        "lefttraining",
-        "platform",
-        "platformbl",
-        "platformbr",
-        "platformfl",
-        "platformfr",
-        "platforml",
-        "rampl",
-        "rampt",
-        "right",
-        "rightcorner",
-        "righttraining",
-        "shade",
-        "table",
-        "treeclimb",
-        "treehouse",
-        "treehousel",
-        "treehouser"
-      ]
-    },
-    {
-      "name": "FoxCorner",
-      "presets": [
-        "bowl",
-        "den",
-        "ellatraining",
-        "hillleft",
-        "hillright",
-        "hillwide",
-        "home",
-        "insidedoor",
-        "table",
-        "training",
-        "training2"
+        "pond",
+        "water"
       ]
     },
     {
@@ -285,12 +294,10 @@
       "name": "MarmIn",
       "presets": [
         "bowll",
-        "bowllc",
         "bridgecl",
         "bridgel",
         "bridgem",
         "bridger",
-        "bridgerc",
         "center",
         "cornershelf",
         "domeleft",
@@ -304,20 +311,19 @@
         "pole",
         "right",
         "table",
-        "topshelf",
         "win1",
         "win2",
         "win3",
         "win4",
         "windows",
         "winl",
-        "winr"
+        "winr",
+        "leftw"
       ]
     },
     {
       "name": "MarmOut",
       "presets": [
-        "below",
         "bottomshelfl",
         "bottomshelfr",
         "domel",
@@ -328,8 +334,6 @@
         "flapr",
         "flaps",
         "frontdoor",
-        "ground",
-        "groundr",
         "home",
         "hose",
         "ir",
@@ -349,21 +353,71 @@
         "topshelfl",
         "topshelfr",
         "rightscreen",
-        "rope"
+        "rope",
+        "rightpost"
+      ]
+    },
+    {
+      "name": "FoxCorner",
+      "presets": [
+        "bowl",
+        "den",
+        "hillleft",
+        "hillright",
+        "hillwide",
+        "home",
+        "insidedoor",
+        "table",
+        "training",
+        "training2"
+      ]
+    },
+    {
+      "name": "WolfIndoor",
+      "presets": [
+        "doors",
+        "home",
+        "left",
+        "right",
+        "platformcenter",
+        "platformleft",
+        "platformright",
+        "center",
+        "down",
+        "downright",
+        "neardoor",
+        "platformleftb",
+        "platformrightb"
       ]
     },
     {
       "name": "Georgie",
       "presets": [
-        "closedirt",
-        "closeup",
-        "dirt",
+        "home"
+      ]
+    },
+    {
+      "name": "GeorgieWater",
+      "presets": [
+        "home"
+      ]
+    },
+    {
+      "name": "Chicken",
+      "presets": [
+        "backright",
+        "down",
+        "downright",
         "home",
-        "ramp",
-        "shore",
-        "shoreright",
-        "water",
-        "wide"
+        "left",
+        "right",
+        "window"
+      ]
+    },
+    {
+      "name": "ChickenIndoor",
+      "presets": [
+        "home"
       ]
     },
     {
@@ -402,17 +456,35 @@
       ]
     },
     {
-      "name": "Marty",
+      "name": "Pushpop",
       "presets": [
-        "a",
-        "b",
-        "c",
-        "food1",
-        "food2",
-        "food3",
-        "food4",
-        "food5",
-        "party"
+        "backleft",
+        "backright",
+        "behind",
+        "food",
+        "home",
+        "left",
+        "right",
+        "crunchwide",
+        "cubby"
+      ]
+    },
+    {
+      "name": "PushpopIndoor",
+      "presets": [
+        "digbox",
+        "down",
+        "downl",
+        "downr",
+        "home",
+        "leftcorner",
+        "rightcorner"
+      ]
+    },
+    {
+      "name": "PushpopCrunch",
+      "presets": [
+        "home"
       ]
     },
     {
@@ -420,52 +492,35 @@
       "presets": [
         "down",
         "food",
-        "food1",
-        "food2",
         "home",
         "left",
-        "leftcorner",
-        "stickb",
-        "stickt",
-        "sticktl",
-        "top"
-      ]
-    },
-    {
-      "name": "Puppy",
-      "presets": [
-        "home"
-      ]
-    },
-    {
-      "name": "BB",
-      "presets": [
-        "a",
-        "b",
-        "backcenter",
-        "backcorner",
-        "backleft",
-        "backright",
-        "c",
-        "food",
-        "food1",
-        "food2",
-        "food3",
-        "food4",
-        "food5",
-        "home",
-        "nest",
-        "nest2",
-        "topright"
+        "top",
+        "downr",
+        "right",
+        "stickl",
+        "sticklt",
+        "stickr",
+        "stickrt"
       ]
     },
     {
       "name": "Hank",
       "presets": [
-        "bottom",
-        "middle",
-        "top"
+        "home",
+        "water"
       ]
+    },
+    {
+      "name": "Chin",
+      "presets": []
+    },
+    {
+      "name": "Chin2",
+      "presets": []
+    },
+    {
+      "name": "Chin3",
+      "presets": []
     },
     {
       "name": "WolfDen",
@@ -476,7 +531,13 @@
     },
     {
       "name": "WolfDen2",
-      "presets": []
+      "presets": [
+        "bottomright",
+        "home",
+        "left",
+        "leftcorner",
+        "rightcorner"
+      ]
     },
     {
       "name": "WolfMulti",
@@ -519,7 +580,11 @@
       "presets": []
     },
     {
-      "name": "RatMulti",
+      "name": "GeorgieMulti",
+      "presets": []
+    },
+    {
+      "name": "ChickenMulti",
       "presets": []
     }
   ]
