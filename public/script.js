@@ -2621,7 +2621,7 @@ function sendZoomR() {
         zoom = zoomTextBoxValue;
     }
 
-    const command = `!ptzzoomr ${selectedCamera.toLowerCase()} ${zoom}`;
+    const command = `!ptzzoom ${selectedCamera.toLowerCase()} ${zoom}`;
     sendCommand(command);
 
     // Clear the input values
@@ -2701,7 +2701,7 @@ function sendSwapCommand() {
 
 function sendFocusCommand() {
     const focus = document.getElementById('focus').value || '';
-    const command = `!ptzfocusr ${selectedCamera.toLowerCase()} ${focus}`;
+    const command = `!ptzfocus ${selectedCamera.toLowerCase()} ${focus}`;
     sendCommand(command);
 
     // Clear the input values
