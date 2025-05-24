@@ -47,7 +47,10 @@
     "switchpenl": "spl",
     "switchpenr": "spr",
     "switchramp": "sr",
-    "tipmo": "tm"
+    "tipmo": "tm",
+    "akelafood": "af",
+    "den1tz": "d1tz",
+    "trees": "tr"
   },
   "WolfCorner": {
     "backfence": "bf",
@@ -90,7 +93,9 @@
     "wolfcam": "wc",
     "grassl": "gl",
     "leftcornerw": "lcw",
-    "switchpen": "sp"
+    "switchpen": "sp",
+    "back": "b",
+    "trees": "t"
   },
   "WolfIndoor": {
     "doors": "do",
@@ -173,7 +178,11 @@
     "platform1": "p1",
     "platform2": "p2",
     "tablet": "t",
-    "littlesbowl3": "lbo3"
+    "littlesbowl3": "lbo3",
+    "upleft": "ul",
+    "upmiddle": "um",
+    "upright": "ur",
+    "macawssleep": "ms"
   },
   "Fox": {
     "belowplatform": "bp",
@@ -211,7 +220,8 @@
     "treeclimb": "tc",
     "treehouse": "th",
     "treehousel": "thl",
-    "treehouser": "thr"
+    "treehouser": "thr",
+    "centerleft": "cl"
   },
   "FoxCorner": {
     "home": "h",
@@ -268,7 +278,8 @@
     "treet": "tt",
     "water": "w",
     "groundl": "gl",
-    "groundr": "gr"
+    "groundr": "gr",
+    "treebase": "tba"
   },
   "MarmIn": {
     "bowll": "bl",
@@ -333,18 +344,19 @@
     "post2t": "p2t",
     "bottomshelfl": "bsl",
     "bottomshelfr": "bsr",
-    "rightpost": "rpo"
+    "rightpost": "rpo",
+    "leftpostshelvest": "lpst"
   },
   "Georgie": {
-    "closedirt": "cd",
-    "closeup": "cu",
-    "dirt": "d",
     "home": "h",
-    "ramp": "r",
     "shore": "s",
-    "shoreright": "sr",
     "water": "wa",
-    "wide": "w"
+    "cave": "c",
+    "down": "d",
+    "downl": "dl",
+    "downr": "dr",
+    "land": "l",
+    "landz": "lz"
   },
   "WolfDen": {
     "home": "h",
@@ -356,7 +368,8 @@
     "left": "l",
     "water": "w",
     "farbranches": "fb",
-    "closebranch": "cb"
+    "closebranch": "cb",
+    "farrock": "fr"
   },
   "Toast": {
     "down": "d",
@@ -366,7 +379,9 @@
     "log": "l",
     "logz": "lz",
     "water": "w",
-    "food": "f"
+    "food": "f",
+    "rocksandwich": "rs",
+    "closerock": "cr"
   },
   "Patchy": {
     "closebranches": "cb",
@@ -377,15 +392,19 @@
     "water": "w"
   },
   "Pushpop": {
-    "backleft": "bl",
-    "backright": "br",
-    "behind": "b",
-    "food": "f",
     "home": "h",
     "left": "l",
     "right": "r",
     "crunchwide": "cw",
-    "cubby": "cu"
+    "cubby": "cu",
+    "down": "d",
+    "downcubby": "dc",
+    "downl": "dl",
+    "downr": "dr",
+    "farfence": "ff",
+    "hut": "hu",
+    "insidedoor": "id",
+    "water": "w"
   },
   "WolfDen2": {
     "home": "h",
@@ -421,10 +440,23 @@
     "downr": "dr",
     "home": "h",
     "leftcorner": "lc",
-    "rightcorner": "rc"
+    "rightcorner": "rc",
+    "farcorner": "fc",
+    "left": "l",
+    "right": "r"
   },
   "ChickenIndoor": {
-    "home": "h"
+    "home": "h",
+    "down": "d",
+    "downl": "dl",
+    "downr": "dr",
+    "entryl": "el",
+    "entryr": "er",
+    "humandoor": "hd",
+    "nestboxes": "nb",
+    "perchl": "pl",
+    "perchr": "pr",
+    "right": "r"
   },
   "Chicken": {
     "backright": "br",
@@ -433,7 +465,11 @@
     "home": "h",
     "left": "l",
     "right": "r",
-    "window": "w"
+    "window": "w",
+    "food": "f",
+    "oliversleep": "os",
+    "barrels": "b",
+    "nuggetsleep": "ns"
   },
   "GeorgieWater": {
     "home": "h"
@@ -443,13 +479,16 @@
     "den": "d",
     "dentop": "dt",
     "down": "do",
-    "downleft": "dl",
-    "downright": "dr",
+    "downleft": "dol",
+    "downright": "dor",
     "farleft": "fl",
     "farright": "fr",
     "home": "h",
     "insidedoor": "id",
     "pond": "p",
-    "water": "w"
+    "water": "w",
+    "denl": "dl",
+    "denr": "dr",
+    "middleleft": "ml"
   }
 }
