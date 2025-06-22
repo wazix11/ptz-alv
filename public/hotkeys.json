@@ -112,7 +112,10 @@
     "downright": "dr",
     "neardoor": "nd",
     "platformleftb": "plb",
-    "platformrightb": "prb"
+    "platformrightb": "prb",
+    "downleft": "dl",
+    "leftcorner": "lc",
+    "water": "w"
   },
   "Pasture": {
     "angel": "a",
@@ -182,7 +185,8 @@
     "upleft": "ul",
     "upmiddle": "um",
     "upright": "ur",
-    "macawssleep": "ms"
+    "macawssleep": "ms",
+    "littlesbridge": "lbr"
   },
   "Fox": {
     "belowplatform": "bp",
@@ -465,11 +469,20 @@
     "home": "h",
     "left": "l",
     "right": "r",
-    "window": "w",
+    "window": "wi",
     "food": "f",
     "oliversleep": "os",
     "barrels": "b",
-    "nuggetsleep": "ns"
+    "nuggetsleep": "ns",
+    "backcenter": "bc",
+    "backlb": "blb",
+    "backleft": "bl",
+    "center": "c",
+    "downleft": "dl",
+    "leftrock": "lr",
+    "ramp": "ra",
+    "rightcorner": "rc",
+    "water": "w"
   },
   "GeorgieWater": {
     "home": "h"
@@ -490,5 +503,9 @@
     "denl": "dl",
     "denr": "dr",
     "middleleft": "ml"
+  },
+  "PastureFeeder": {
+    "home": "h",
+    "stompy": "s"
   }
 }

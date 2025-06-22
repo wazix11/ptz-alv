@@ -41,7 +41,8 @@
         "grove2",
         "pedrocorner",
         "ground",
-        "grove2l"
+        "grove2l",
+        "barn2z"
       ]
     },
     {
@@ -76,7 +77,8 @@
         "macawssleep",
         "upleft",
         "upmiddle",
-        "upright"
+        "upright",
+        "littlesbridge"
       ]
     },
     {
@@ -174,7 +176,8 @@
         "tipmo",
         "akelafood",
         "den1tz",
-        "trees"
+        "trees",
+        "pump"
       ]
     },
     {
@@ -222,7 +225,9 @@
         "leftcornerw",
         "switchpen",
         "back",
-        "trees"
+        "trees",
+        "den2r",
+        "den2shadel"
       ]
     },
     {
@@ -400,7 +405,10 @@
         "downright",
         "neardoor",
         "platformleftb",
-        "platformrightb"
+        "platformrightb",
+        "downleft",
+        "leftcorner",
+        "water"
       ]
     },
     {
@@ -435,7 +443,16 @@
         "food",
         "oliversleep",
         "barrels",
-        "nuggetsleep"
+        "nuggetsleep",
+        "backcenter",
+        "backlb",
+        "backleft",
+        "center",
+        "downleft",
+        "leftrock",
+        "ramp",
+        "rightcorner",
+        "water"
       ]
     },
     {
@@ -451,7 +468,9 @@
         "nestboxes",
         "perchl",
         "perchr",
-        "right"
+        "right",
+        "downmiddle",
+        "perches"
       ]
     },
     {
@@ -590,51 +609,82 @@
     },
     {
       "name": "WolfMulti",
-      "presets": []
+      "presets": [
+        "home"
+      ]
     },
     {
       "name": "WolfWolfIn",
-      "presets": []
+      "presets": [
+        "home"
+      ]
     },
     {
       "name": "WolfDenMulti",
-      "presets": []
+      "presets": [
+        "home"
+      ]
     },
     {
       "name": "WolfDen2Multi",
-      "presets": []
+      "presets": [
+        "home"
+      ]
     },
     {
       "name": "WolfCWolfIn",
-      "presets": []
+      "presets": [
+        "home"
+      ]
     },
     {
       "name": "MarmOutMarmIn",
-      "presets": []
+      "presets": [
+        "home"
+      ]
     },
     {
       "name": "FoxFoxCorner",
-      "presets": []
+      "presets": [
+        "home"
+      ]
     },
     {
       "name": "CrowOutCrowIn",
-      "presets": []
+      "presets": [
+        "home"
+      ]
     },
     {
       "name": "CrowInCrowOut",
-      "presets": []
+      "presets": [
+        "home"
+      ]
     },
     {
       "name": "GeorgieMulti",
-      "presets": []
+      "presets": [
+        "home"
+      ]
     },
     {
       "name": "ChickenMulti",
-      "presets": []
+      "presets": [
+        "home"
+      ]
     },
     {
       "name": "ChinMulti",
-      "presets": []
+      "presets": [
+        "home"
+      ]
+    },
+    {
+      "name": "PastureFeeder",
+      "presets": [
+        "home",
+        "stompy"
+      ]
     }
   ]
 }
