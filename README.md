@@ -1,3 +1,7 @@
+Stop. Do not use this repo. Use https://github.com/wazix11/ptz-alv
+
+
+
 # Alveus PTZ Control
 
 This is a community-built, open source tool for controlling the Alveus Sanctuary cameras.
