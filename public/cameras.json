@@ -42,7 +42,10 @@
         "pedrocorner",
         "ground",
         "grove2l",
-        "barn2z"
+        "barn2z",
+        "groundr",
+        "grove2r",
+        "purplebasel"
       ]
     },
     {
@@ -227,7 +230,9 @@
         "back",
         "trees",
         "den2r",
-        "den2shadel"
+        "den2shadel",
+        "log",
+        "treesl"
       ]
     },
     {
@@ -372,7 +377,8 @@
         "rightscreen",
         "rope",
         "rightpost",
-        "leftpostshelvest"
+        "leftpostshelvest",
+        "domelt"
       ]
     },
     {
@@ -421,7 +427,8 @@
         "downr",
         "land",
         "landz",
-        "shore"
+        "shore",
+        "far"
       ]
     },
     {
@@ -452,7 +459,8 @@
         "leftrock",
         "ramp",
         "rightcorner",
-        "water"
+        "water",
+        "nuggethide"
       ]
     },
     {
@@ -482,7 +490,8 @@
         "water",
         "farbranches",
         "closebranch",
-        "farrock"
+        "farrock",
+        "leftshelf"
       ]
     },
     {
@@ -526,7 +535,11 @@
         "insidedoor",
         "left",
         "right",
-        "water"
+        "water",
+        "farcenter",
+        "farleft",
+        "farright",
+        "hutz"
       ]
     },
     {
@@ -541,7 +554,8 @@
         "rightcorner",
         "farcorner",
         "left",
-        "right"
+        "right",
+        "heatlamp"
       ]
     },
     {
@@ -683,7 +697,91 @@
       "name": "PastureFeeder",
       "presets": [
         "home",
-        "stompy"
+        "stompy",
+        "feeder"
+      ]
+    },
+    {
+      "name": "BB",
+      "presets": [
+        "home"
+      ]
+    },
+    {
+      "name": "Marty",
+      "presets": []
+    },
+    {
+      "name": "ToastCrunch",
+      "presets": [
+        "home",
+        "right"
+      ]
+    },
+    {
+      "name": "Garden",
+      "presets": [
+        "bughotel",
+        "home",
+        "barn1r",
+        "barn2",
+        "gate",
+        "pasturebrush",
+        "pasturegrove",
+        "pastureleft",
+        "pastureright",
+        "pasturewater",
+        "tccenter",
+        "tcleft",
+        "tcright",
+        "bughotel2",
+        "pasturepole",
+        "poolright",
+        "roundpen"
+      ]
+    },
+    {
+      "name": "Tarantula",
+      "presets": [
+        "home",
+        "eva",
+        "kiwi"
+      ]
+    },
+    {
+      "name": "TarantulaPTZ",
+      "presets": [
+        "eva",
+        "evabottomleft",
+        "evabottomright",
+        "evatopleft",
+        "evatopright",
+        "home",
+        "kiwi",
+        "kiwibottomleft",
+        "kiwibottomright",
+        "kiwitopleft",
+        "kiwitopright"
+      ]
+    },
+    {
+      "name": "Emu",
+      "presets": [
+        "foodleft",
+        "foodright",
+        "gate",
+        "gateleft",
+        "home",
+        "marmgate",
+        "marmwin3",
+        "marmwindows",
+        "pen1center",
+        "pen1centerright",
+        "pen1left",
+        "pen1right",
+        "pen2left",
+        "pen2right",
+        "pen2water"
       ]
     }
   ]

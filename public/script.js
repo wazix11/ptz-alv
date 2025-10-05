@@ -365,6 +365,119 @@ document.addEventListener('DOMContentLoaded', function () {
     const presetContainer = document.querySelector('.preset-container');
     const customPresetContainer = document.querySelector('.custom-preset-container');
 
+    function openSwapDialog() {
+        // Create the dialog element if it doesn't exist
+        let dialog = document.getElementById('dialog');
+        let closeButton;
+        adjustLayout();
+
+        document.body.classList.add('no-scroll'); // Disable scrolling
+        if (!dialog) {
+            dialog = document.createElement('div');
+            dialog.id = 'dialog';
+            dialog.className = 'dialog'; // Default class
+
+            const dialogContent = document.createElement('div');
+            dialogContent.className = 'dialog-content';
+
+            closeButton = document.createElement('span');
+            closeButton.id = 'closeDialogButton';
+            closeButton.className = 'close-button';
+            closeButton.innerHTML = '&times;'; // Close button (×)
+
+            // Append elements to the dialog content
+            dialogContent.appendChild(closeButton);
+
+            // Append dialog content to the dialog
+            dialog.appendChild(dialogContent);
+
+            // Append dialog to the body
+            document.body.appendChild(dialog);
+        } else {
+            closeButton = document.getElementById('closeDialogButton');
+        }
+        
+
+        const cameraSwapContainer = document.createElement('div');
+        cameraSwapContainer.className = 'camera-swap-container';
+        dialog.classList.remove('grid-layout', 'list-layout');
+        dialog.classList.add('grid-layout');
+
+        if (camerasData && camerasData.cameras) {
+            camerasData.cameras.forEach(camera => {
+                const buttonContainer = document.createElement('div');
+                buttonContainer.classList.add('camera-swap-button-container');
+
+                const image = document.createElement('img');
+                image.classList.add('camera-swap-image');
+                image.src = `camera-img/${camera.name}.webp`;
+                image.alt = '';
+                image.onerror = function () {
+                    image.src = 'img/logo.webp';
+                };
+                image.addEventListener('click', () => {
+                    button.click();
+                });
+
+                const button = document.createElement('button');
+                button.classList.add('camera-swap-button');
+                button.textContent = camera.name;
+                button.addEventListener('click', () => {
+                    selectCamera(camera.name);
+                    dialog.style.display = 'none';
+                    document.body.classList.remove('no-scroll');
+                });
+
+                buttonContainer.appendChild(image);
+                buttonContainer.appendChild(button);
+                cameraSwapContainer.appendChild(buttonContainer);
+            });
+        }
+
+        // Remove any existing layout classes
+        dialog.classList.remove('grid-layout', 'list-layout');
+
+        // Add a layout class if needed (optional, e.g., 'list-layout')
+        dialog.classList.add('grid-layout');
+
+        // Apply styles for the dialog
+        adjustLayout();
+
+        // Reattach event listeners to camera thumbnails (already attached above, but for completeness)
+        const cameraThumbnails = cameraSwapContainer.querySelectorAll('.camera-swap-image');
+        cameraThumbnails.forEach(thumbnail => {
+            thumbnail.addEventListener('click', (event) => {
+            const button = event.target.closest('.camera-swap-button-container')?.querySelector('.camera-swap-button');
+            if (button) {
+                button.click();
+            }
+            });
+        });
+
+        // Clear previous content in the dialog and append the new camera container
+        const dialogContent = document.querySelector('.dialog-content');
+        if (dialogContent) {
+            dialogContent.innerHTML = '';
+            dialogContent.appendChild(closeButton);
+            dialogContent.appendChild(cameraSwapContainer);
+            dialog.style.display = 'block';
+        }
+
+        // Event listeners for closing the dialog
+        closeButton.addEventListener('click', closeSwapDialog);
+        window.addEventListener('click', (event) => {
+            if (event.target === dialog) {
+                closeSwapDialog();
+            }
+        });
+
+        // Function to close the dialog
+        function closeSwapDialog() {
+            dialog.style.display = 'none';
+            document.body.classList.remove('no-scroll'); // Enable scrolling
+        }
+    }    
+
     function openPresetDialog() {
         // Create the dialog element if it doesn't exist
         let dialog = document.getElementById('dialog');
@@ -418,7 +531,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 dialog.classList.add('list-layout');
             }
             // Apply styles based on layout type
-            applyStyles(layoutType);
             adjustLayout();
 
             // Add layout-specific class to dialog
@@ -475,9 +587,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 // Show the dialog
                 dialog.style.display = 'block';
-
-                // Ensure styles are applied
-                applyStyles(layoutType); // Call with layoutType to apply specific styles
             }
         }
 
@@ -494,55 +603,6 @@ document.addEventListener('DOMContentLoaded', function () {
             dialog.style.display = 'none';
             document.body.classList.remove('no-scroll'); // Enable scrolling
         }
-    }
-
-    function applyStyles(isGridLayout) {
-        const style = document.createElement('style');
-        style.textContent = `
-           .dialog {
-                display: none; /* Hidden by default */
-                position: fixed;
-                left: 50%; /* Center horizontally */
-                top: 0; /* Cover full screen vertically */
-                transform: translateX(-50%); /* Center horizontally */
-                width: 100%;
-                height: 100%;
-                background-color: rgba(0,0,0,0.5); /* Semi-transparent background */
-                z-index: 1000; /* Make sure it appears on top */
-                overflow: hidden; /* Prevent scrolling within the dialog */
-            }
-
-            .dialog-content {
-                background: #404040;
-                padding: 20px;
-                border-radius: 5px;
-                position: absolute; /* Position absolutely within the dialog */
-                top: 35%; /* Move down from vertical center (adjust this value) */
-                left: 50%; /* Center horizontally within the dialog */
-                transform: translate(-50%, -50%); /* Adjust to center content */
-                width: 80%;
-                max-width: 800px;
-                max-height: 80vh; /* Limit height to viewport height */
-                overflow-y: auto; /* Allow scrolling within the dialog content if it overflows */
-            }
-
-            .dialog.grid-layout .dialog-content {
-                width: 90%; /* Adjust width for grid layout */
-                max-width: 60%; /* Example max width for grid layout */
-            }
-
-            .dialog.list-layout .dialog-content {
-                width: 80%; /* Adjust width for list layout */
-                max-width: 500px; /* Example max width for list layout */
-            }
-
-            .close-button {
-                float: right;
-                font-size: 24px;
-                cursor: pointer;
-            }
-        `;
-        document.head.appendChild(style);
     }
 
     // Function to reattach event listeners to cloned buttons and images
@@ -791,6 +851,13 @@ document.addEventListener('DOMContentLoaded', function () {
             toggleClickAF();
         });
 
+        const button8 = document.createElement("button");
+        button8.classList.add("vidbutton8");
+        button8.textContent = "Swap Menu";
+        button8.addEventListener('click', function () {
+            openSwapDialog();
+        });
+
         const videoContainer = document.createElement("div");
         videoContainer.id = "video-container";
         videoContainer.style.position = 'relative';
@@ -844,6 +911,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
         buttonDiv.appendChild(button2);
+        buttonDiv.appendChild(button8);
         buttonDiv.appendChild(button6);
         buttonDiv.appendChild(button7);
         buttonDiv.appendChild(button3);
@@ -2621,7 +2689,7 @@ function sendZoomR() {
         zoom = zoomTextBoxValue;
     }
 
-    const command = `!ptzzoomr ${selectedCamera.toLowerCase()} ${zoom}`;
+    const command = `!ptzzoom ${selectedCamera.toLowerCase()} ${zoom}`;
     sendCommand(command);
 
     // Clear the input values
@@ -2651,7 +2719,7 @@ function sendpadZoom(action) {
     }
 
 
-    const command = `!ptzareazoom ${selectedCamera.toLowerCase()} 960 540 ${zoomLevel}`;
+    const command = `!ptzzoom ${zoomLevel}`;
     sendCommand(command);
 }
 
@@ -2701,7 +2769,7 @@ function sendSwapCommand() {
 
 function sendFocusCommand() {
     const focus = document.getElementById('focus').value || '';
-    const command = `!ptzfocusr ${selectedCamera.toLowerCase()} ${focus}`;
+    const command = `!ptzfocus ${selectedCamera.toLowerCase()} ${focus}`;
     sendCommand(command);
 
     // Clear the input values
@@ -2757,6 +2825,10 @@ function setPresetSwap(selected) {
         sendCommand('!swap wolf wolfindoor');
     } else if (selected === 'wden') {
         sendCommand('!swap wolf wolfden');
+    } else if (selected === 'ws-w') {
+        sendCommand('!swap wolf wolfswitch');
+    } else if (selected === 'wswin') {
+        sendCommand('!swap wolfindoor wolfswitch');
     } else if (selected === 'fox') {
         sendCommand('!swap fox foxcorner');
     } else if (selected === 'chkn') {
@@ -2765,6 +2837,14 @@ function setPresetSwap(selected) {
         sendCommand('!swap georgie georgiewater');
     } else if (selected == 'push') {
         sendCommand('!swap pushpop pushpopindoor');
+    } else if (selected == 'past') {
+        sendCommand('!swap pasture pasturefeeder');
+    } else if (selected == 'gard') {
+        sendCommand('!swap pasture garden');
+    } else if (selected == 'tar') {
+        sendCommand('!swap tarantula tarantulaptz');
+    } else if (selected == 'toast') {
+        sendCommand('!swap toast toastcrunch');
     }
 }
 

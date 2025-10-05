@@ -453,6 +453,45 @@ body {
     display: none;
 }
 
+.camera-swap-button-container {
+    display: inline-block;
+    text-align: center;
+    margin-bottom: 20px; /* Adjust as needed */
+    margin-right: 20px; /* Add margin between containers */
+}
+
+.camera-swap-button {
+    width: 220px; /* Adjust width as needed */
+    display: block; /* Ensure proper alignment */
+    margin: 0 auto 0px; /* Center image and button and add space below */
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3); /* Add 3D shadow effect */
+    cursor: pointer; /* Add cursor pointer */
+    border-top-left-radius: 0px; /* Adjust the radius for the top-left corner */
+    border-top-right-radius: 0px; /* Adjust the radius for the top-right corner */
+    border-bottom-left-radius: 5px; /* Keep the bottom-left corner square */
+    border-bottom-right-radius: 5px; /* Keep the bottom-right corner square */
+    height: 30px; /* Adjust height of the button */
+    background-color: #222222; /* Button background color */
+    color: white; /* Button text color */
+    border: none; /* Remove border */
+    cursor: pointer; /* Add cursor pointer */
+    font-size: 18px; /* Adjust font size */
+}
+
+
+.camera-swap-image {
+    width: 220px; /* Adjust width as needed */
+    height: 124px; /* Maintain aspect ratio */
+    display: block; /* Ensure proper alignment */
+    margin: 0 auto 0px; /* Center image and button and add space below */
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3); /* Add 3D shadow effect */
+    cursor: pointer; /* Add cursor pointer */
+    border-top-left-radius: 5px; /* Adjust the radius for the top-left corner */
+    border-top-right-radius: 5px; /* Adjust the radius for the top-right corner */
+    border-bottom-left-radius: 0; /* Keep the bottom-left corner square */
+    border-bottom-right-radius: 0; /* Keep the bottom-right corner square */
+}
+
 /* Styles for screens less than 600px */
 @media (max-width: 600px) {
 .list-layout {
@@ -574,6 +613,12 @@ body {
 }
 
 .preset-button, .custom-preset-button {
+    height: 30px; /* Adjust height of the button */
+    background-color: #1F1B24; /* Button background color */
+    color: white; /* Button text color */
+    border: none; /* Remove border */
+    cursor: pointer; /* Add cursor pointer */
+    font-size: 18px; /* Adjust font size */
     width: 220px; /* Adjust width as needed */
     display: block; /* Ensure proper alignment */
     margin: 0 auto 0px; /* Center image and button and add space below */
@@ -588,6 +633,7 @@ body {
 
 .preset-image, .custom-preset-image {
     width: 220px; /* Adjust width as needed */
+    height: 124px; /* Maintain aspect ratio */
     display: block; /* Ensure proper alignment */
     margin: 0 auto 0px; /* Center image and button and add space below */
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3); /* Add 3D shadow effect */
@@ -598,9 +644,6 @@ body {
     border-bottom-right-radius: 0; /* Keep the bottom-right corner square */
     
 }
-.preset-image, .custom-preset-image {
-    height: 124px; /* Maintain aspect ratio */
-}
 
 .preset-button, .custom-preset-button {
     height: 30px; /* Adjust height of the button */
@@ -609,7 +652,6 @@ body {
     border: none; /* Remove border */
     cursor: pointer; /* Add cursor pointer */
     font-size: 18px; /* Adjust font size */
-    /* Add other button styles as needed */
 }
 
 .label-preset {
@@ -828,11 +870,18 @@ body {
     border-top-right-radius: 0px; /* Adjust the radius for the top-right corner */
     border-bottom-left-radius: 5px; /* Keep the bottom-left corner square */
     border-bottom-right-radius: 5px; /* Keep the bottom-right corner square */
+    height: 30px; /* Adjust height of the button */
+    background-color: #222222; /* Button background color */
+    color: white; /* Button text color */
+    border: none; /* Remove border */
+    cursor: pointer; /* Add cursor pointer */
+    font-size: 18px; /* Adjust font size */
 }
 
 
 .preset-image, .custom-preset-image {
     width: 220px; /* Adjust width as needed */
+    height: 124px; /* Maintain aspect ratio */
     display: block; /* Ensure proper alignment */
     margin: 0 auto 0px; /* Center image and button and add space below */
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3); /* Add 3D shadow effect */
@@ -841,19 +890,6 @@ body {
     border-top-right-radius: 5px; /* Adjust the radius for the top-right corner */
     border-bottom-left-radius: 0; /* Keep the bottom-left corner square */
     border-bottom-right-radius: 0; /* Keep the bottom-right corner square */
-}
-.preset-image, .custom-preset-image {
-    height: 124px; /* Maintain aspect ratio */
-}
-
-.preset-button, .custom-preset-button {
-    height: 30px; /* Adjust height of the button */
-    background-color: #222222; /* Button background color */
-    color: white; /* Button text color */
-    border: none; /* Remove border */
-    cursor: pointer; /* Add cursor pointer */
-    font-size: 18px; /* Adjust font size */
-    /* Add other button styles as needed */
 }
 
 .label-preset {
@@ -1849,7 +1885,7 @@ body {
     margin-right: 20px; /* Adjust this value to move button3 closer to the center */
 }
 
-.vidbutton6 {
+.vidbutton6, .vidbutton8 {
     margin-left: 10px; /* Adjust this value to move button3 closer to the center */
 }
 
@@ -1871,7 +1907,8 @@ body {
 .vidbutton4:hover, 
 .vidbutton5:hover, 
 .vidbutton6:hover, 
-.vidbutton7:hover {
+.vidbutton7:hover,
+.vidbutton8:hover {
     background-color: #1e88e5;
 }
   .camera-button {
@@ -1917,21 +1954,33 @@ body {
     z-index: 1000; /* Sit on top of everything else */
     left: 0;
     top: 0;
-    width: 100px; /* Full width */
+    width: 100%; /* Full width */
     height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
+    overflow: hidden; /* Enable scroll if needed */
     background-color: rgba(0,0,0,0.5); /* Black w/ opacity */
 }
 
 /* Dialog Content */
 .dialog-content {
-    background-color: #fefefe;
-    margin: 10% auto; /* Center the dialog */
+    background-color: #404040;
+    margin: 5% auto;
     padding: 20px;
     border: 1px solid #888;
+    border-radius: 5px;
     width: 80%; /* Could be more or less, depending on screen size */
-    max-width: 800px; /* Maximum width of the dialog */
+    max-height: 80vh;
     position: relative; /* Position relative to allow positioning of the close button */
+    overflow-y: auto;
+}
+
+.dialog.grid-layout .dialog-content {
+    width: 90%; /* Adjust width for grid layout */
+    max-width: 60%; /* Example max width for grid layout */
+}
+
+.dialog.list-layout .dialog-content {
+    width: 80%; /* Adjust width for list layout */
+    max-width: 500px; /* Example max width for list layout */
 }
 
 /* Close Button */

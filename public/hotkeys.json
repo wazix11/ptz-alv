@@ -349,7 +349,8 @@
     "bottomshelfl": "bsl",
     "bottomshelfr": "bsr",
     "rightpost": "rpo",
-    "leftpostshelvest": "lpst"
+    "leftpostshelvest": "lpst",
+    "domelt": "dlt"
   },
   "Georgie": {
     "home": "h",
@@ -507,5 +508,26 @@
   "PastureFeeder": {
     "home": "h",
     "stompy": "s"
+  },
+  "Garden": {
+    "home": "h",
+    "bughotel": "bh"
+  },
+  "Emu": {
+    "foodleft": "fl",
+    "foodright": "fr",
+    "gate": "g",
+    "gateleft": "gl",
+    "home": "h",
+    "marmgate": "mg",
+    "marmwin3": "mw3",
+    "marmwindows": "mw",
+    "pen1center": "plc",
+    "pen1centerright": "plcr",
+    "pen1left": "pll",
+    "pen1right": "plr",
+    "pen2left": "p2l",
+    "pen2right": "p2r",
+    "pen2water": "p2w"
   }
 }
