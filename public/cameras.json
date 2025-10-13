@@ -49,39 +49,25 @@
       ]
     },
     {
-      "name": "Parrots",
+      "name": "Littles",
       "presets": [
-        "abovedoor",
-        "bothwindows",
-        "chicken",
-        "door",
-        "floor",
-        "floorl",
+        "left",
+        "right",
+        "water",
+        "window",
+        "down",
         "floorr",
         "home",
-        "littles",
-        "littles2",
-        "littlesb",
-        "littlesbowl",
-        "littlesbowl2",
-        "littlessleep",
-        "littlest",
-        "littlesw",
-        "macaws",
-        "macawsb",
-        "macawsbowl",
-        "macawsbowl2",
-        "macawst",
-        "macawsw",
-        "platform1",
-        "platform2",
-        "tablet",
-        "littlesbowl3",
-        "macawssleep",
-        "upleft",
-        "upmiddle",
-        "upright",
-        "littlesbridge"
+        "leftb"
+      ]
+    },
+    {
+      "name": "Macaws",
+      "presets": [
+        "home",
+        "right",
+        "water",
+        "window"
       ]
     },
     {
@@ -236,23 +222,23 @@
       ]
     },
     {
-      "name": "WolfSwitch",
+      "name": "Emu",
       "presets": [
-        "back",
-        "den",
-        "dentop",
-        "down",
-        "downleft",
-        "downright",
-        "farleft",
-        "farright",
+        "foodleft",
+        "foodright",
+        "gate",
+        "gateleft",
         "home",
-        "insidedoor",
-        "pond",
-        "water",
-        "denl",
-        "denr",
-        "middleleft"
+        "marmgate",
+        "marmwin3",
+        "marmwindows",
+        "pen1center",
+        "pen1centerright",
+        "pen1left",
+        "pen1right",
+        "pen2left",
+        "pen2right",
+        "pen2water"
       ]
     },
     {
@@ -415,6 +401,26 @@
         "downleft",
         "leftcorner",
         "water"
+      ]
+    },
+    {
+      "name": "WolfSwitch",
+      "presets": [
+        "back",
+        "den",
+        "dentop",
+        "down",
+        "downleft",
+        "downright",
+        "farleft",
+        "farright",
+        "home",
+        "insidedoor",
+        "pond",
+        "water",
+        "denl",
+        "denr",
+        "middleleft"
       ]
     },
     {
@@ -762,26 +768,6 @@
         "kiwibottomright",
         "kiwitopleft",
         "kiwitopright"
-      ]
-    },
-    {
-      "name": "Emu",
-      "presets": [
-        "foodleft",
-        "foodright",
-        "gate",
-        "gateleft",
-        "home",
-        "marmgate",
-        "marmwin3",
-        "marmwindows",
-        "pen1center",
-        "pen1centerright",
-        "pen1left",
-        "pen1right",
-        "pen2left",
-        "pen2right",
-        "pen2water"
       ]
     }
   ]

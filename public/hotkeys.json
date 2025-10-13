@@ -529,5 +529,21 @@
     "pen2left": "p2l",
     "pen2right": "p2r",
     "pen2water": "p2w"
+  },
+  "Macaws": {
+    "home": "h",
+    "right": "r",
+    "water": "wa",
+    "window": "w"
+  },
+  "Littles": {
+    "left": "l",
+    "right": "r",
+    "water": "wa",
+    "window": "w",
+    "down": "d",
+    "floorr": "fr",
+    "home": "h",
+    "leftb": "lb"
   }
 }
