@@ -2837,6 +2837,8 @@ function setPresetSwap(selected) {
         sendCommand('!swap georgie georgiewater');
     } else if (selected == 'push') {
         sendCommand('!swap pushpop pushpopindoor');
+    } else if (selected == 'crnch') {
+        sendCommand('!swap pushpop pushpopcrunch');
     } else if (selected == 'past') {
         sendCommand('!swap pasture pasturefeeder');
     } else if (selected == 'gard') {
@@ -2845,6 +2847,8 @@ function setPresetSwap(selected) {
         sendCommand('!swap tarantula tarantulaptz');
     } else if (selected == 'toast') {
         sendCommand('!swap toast toastcrunch');
+    } else if (selected == 'par') {
+        sendCommand('!swap littles macaws');
     }
 }
 
