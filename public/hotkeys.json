@@ -2,6 +2,7 @@
   "Wolf": {
     "center": "c",
     "den1": "d1",
+    "den1feed": "d1f",
     "den1inside": "d1i",
     "den1l": "d1l",
     "den1r": "d1r",
@@ -40,6 +41,7 @@
     "den2rw": "d2rw",
     "log": "lo",
     "neargrass": "ng",
+    "neargrassr": "ngr",
     "shaft": "s",
     "switchden": "sd",
     "switchpen": "sp",
@@ -69,6 +71,7 @@
     "den2inside": "d2i",
     "den2l": "d2l",
     "den2m": "d2m",
+    "den2r": "d2r",
     "den2shade": "d2s",
     "den2t": "d2t",
     "down": "d",
@@ -94,7 +97,8 @@
     "leftcornerw": "lcw",
     "switchpen": "sp",
     "back": "b",
-    "trees": "t"
+    "trees": "t",
+    "treesl": "tl"
   },
   "WolfIndoor": {
     "doors": "do",
@@ -114,7 +118,8 @@
     "platformrightb": "prb",
     "downleft": "dl",
     "leftcorner": "lc",
-    "water": "w"
+    "water": "w",
+    "fencel": "fl"
   },
   "Pasture": {
     "angel": "a",
@@ -122,6 +127,8 @@
     "barn2": "b2",
     "barn2hay": "b2h",
     "barn2r": "b2r",
+    "barn2w": "b2w",
+    "barn2z": "b2z",
     "barnfloor": "bf",
     "brush": "br",
     "brushr": "brr",
@@ -130,6 +137,8 @@
     "feedstall": "fs",
     "fencel": "fl",
     "grove": "g",
+    "grovel": "gl",
+    "grovefl": "gfl",
     "home": "h",
     "insidebarn": "ib",
     "middle": "m",
@@ -140,6 +149,7 @@
     "pooll": "pol",
     "poolr": "por",
     "purplebase": "pb",
+    "purplebasel": "pbl",
     "purplenest": "pn",
     "right": "r",
     "roundpen": "rp",
@@ -151,6 +161,8 @@
     "down": "d",
     "feederstatus": "fst",
     "grove2": "g2",
+    "grove2l": "g2l",
+    "grove2r": "g2r",
     "pedrocorner": "pc",
     "poolw": "pow",
     "pole": "pole"
@@ -190,9 +202,12 @@
     "table": "t",
     "treeclimb": "tc",
     "treehouse": "th",
+    "treehousefl": "thfl",
     "treehousel": "thl",
     "treehouser": "thr",
-    "centerleft": "cl"
+    "centerleft": "cl",
+    "leftcorner": "lc",
+    "treer": "tr"
   },
   "FoxCorner": {
     "home": "h",
@@ -399,8 +414,10 @@
     "leftcorner": "lc",
     "rightcorner": "rc",
     "farcorner": "fc",
+    "farcornerz": "fcz",
     "left": "l",
-    "right": "r"
+    "right": "r",
+    "rightcornerz": "rcz"
   },
   "ChickenIndoor": {
     "home": "h",
@@ -455,7 +472,8 @@
     "water": "w",
     "denl": "dl",
     "denr": "dr",
-    "middleleft": "ml"
+    "middleleft": "ml",
+    "leftcorner": "lc"
   },
   "PastureFeeder": {
     "home": "h",
@@ -463,7 +481,23 @@
   },
   "Garden": {
     "home": "h",
-    "bughotel": "bh"
+    "bughotel": "bh",
+    "barn1r": "b1r",
+    "barn2": "b2",
+    "pasturebrush": "pb",
+    "pasturegrove": "pg",
+    "pastureleft": "pl",
+    "pastureright": "pr",
+    "pasturewater": "pw",
+    "tccenter": "tcc",
+    "tcleft": "tcl",
+    "tcright": "tcr",
+    "bughotel2": "bh2",
+    "pasturepole": "pp",
+    "poolright": "por",
+    "roundpen": "rp",
+    "sunrise": "s",
+    "gate": "g"
   },
   "Emu": {
     "foodleft": "fl",
