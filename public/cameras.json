@@ -8,6 +8,7 @@
         "barn2",
         "barn2hay",
         "barn2r",
+        "barn2w",
         "barnfloor",
         "brush",
         "brushr",
@@ -45,7 +46,9 @@
         "barn2z",
         "groundr",
         "grove2r",
-        "purplebasel"
+        "purplebasel",
+        "grovel",
+        "grovefl"
       ]
     },
     {
@@ -81,6 +84,7 @@
         "center",
         "den",
         "denf",
+        "denfl",
         "denl",
         "denr",
         "down",
@@ -90,6 +94,7 @@
         "home",
         "insidedoor",
         "left",
+        "leftcorner",
         "leftfence",
         "lefttraining",
         "platform",
@@ -107,8 +112,10 @@
         "table",
         "treeclimb",
         "treehouse",
+        "treehousefl",
         "treehousel",
         "treehouser",
+        "treer",
         "bed",
         "behindtree",
         "centerleft"
@@ -122,6 +129,7 @@
         "bigrocks",
         "center",
         "den1",
+        "den1feed",
         "den1inside",
         "den1l",
         "den1r",
@@ -133,6 +141,7 @@
         "den2m",
         "den2mz",
         "den2r",
+        "den2rw",
         "den2t",
         "den2w",
         "down",
@@ -156,6 +165,7 @@
         "den2rw",
         "log",
         "neargrass",
+        "neargrassr",
         "shaft",
         "switchden",
         "switchpen",
@@ -291,6 +301,8 @@
         "platform",
         "platforminside",
         "right",
+        "stick",
+        "stickl",
         "stickz",
         "table",
         "training",
@@ -390,7 +402,8 @@
         "platformrightb",
         "downleft",
         "leftcorner",
-        "water"
+        "water",
+        "fencel"
       ]
     },
     {
@@ -410,7 +423,8 @@
         "water",
         "denl",
         "denr",
-        "middleleft"
+        "middleleft",
+        "leftcorner"
       ]
     },
     {
@@ -456,7 +470,8 @@
         "ramp",
         "rightcorner",
         "water",
-        "nuggethide"
+        "nuggethide",
+        "backcenter"
       ]
     },
     {
@@ -486,6 +501,7 @@
         "water",
         "farbranches",
         "closebranch",
+        "closebranchr",
         "farrock",
         "leftshelf"
       ]
@@ -498,7 +514,10 @@
         "farbranches",
         "groundm",
         "home",
-        "water"
+        "water",
+        "cave",
+        "log",
+        "rightcorner"
       ]
     },
     {
@@ -513,7 +532,8 @@
         "water",
         "food",
         "rocksandwich",
-        "closerock"
+        "closerock",
+        "tunnel"
       ]
     },
     {
@@ -548,7 +568,9 @@
         "home",
         "leftcorner",
         "rightcorner",
+        "rightcornerz",
         "farcorner",
+        "farcornerz",
         "left",
         "right",
         "heatlamp"
@@ -579,7 +601,12 @@
       "name": "Hank",
       "presets": [
         "home",
-        "water"
+        "water",
+        "backleft",
+        "backright",
+        "center",
+        "downleft",
+        "downright"
       ]
     },
     {
@@ -700,12 +727,21 @@
     {
       "name": "BB",
       "presets": [
-        "home"
+        "home",
+        "cave",
+        "down",
+        "downleft",
+        "leftcorner"
       ]
     },
     {
       "name": "Marty",
-      "presets": []
+      "presets": [
+        "down",
+        "downright",
+        "home",
+        "right"
+      ]
     },
     {
       "name": "ToastCrunch",
@@ -733,7 +769,8 @@
         "bughotel2",
         "pasturepole",
         "poolright",
-        "roundpen"
+        "roundpen",
+        "sunrise"
       ]
     },
     {
