@@ -2845,6 +2845,12 @@ function setPresetSwap(selected) {
         sendCommand('!swap pasture garden');
     } else if (selected == 'tar') {
         sendCommand('!swap tarantula tarantulaptz');
+    } else if (selected == 'chin') {
+        sendCommand('!swap chinmulti chin')
+    } else if (selected == 'chin2') {
+        sendCommand('!swap chinmulti chin2')
+    } else if (selected == 'chin3') {
+        sendCommand('!swap chinmulti chin3')
     } else if (selected == 'toast') {
         sendCommand('!swap toast toastcrunch');
     } else if (selected == 'par') {
